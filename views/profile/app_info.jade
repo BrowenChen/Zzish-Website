@@ -1,0 +1,14 @@
+extends profile_layout
+
+block name
+	a(href="/profile/home" style="color: #FFFFFF; font-family: 'Lato', sans-serif;") Welcome back Daryl Rodrigo
+
+block content
+	div.row.styletext
+		hr
+		h1(align="center") Apps
+		hr
+
+		p(style="color: #000000;") <a href="/profile/apps" style="color: #000000;"> Apps </a> > #{app.name}
+
+		p info about app #{app.id}

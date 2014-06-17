@@ -1,0 +1,110 @@
+extends profile_layout
+
+block style
+	link(rel='stylesheet', href='/css/docs.css')
+	link(rel='stylesheet', href='/css/style.css')
+
+block content
+	div.row.main_clearformatting_invert
+		hr
+
+		h1(align="center") Android Guide
+
+		hr
+
+		div.small-8.large-centered.columns.api_docs
+
+		
+			<h3>Installing the library - Eclipse</h3>
+
+			<hr>
+
+			<h6>Step 1 - Download the latest Zzish e-mbaas-ador library</h6>
+			<p>Here's the link <a href="http://platform.zzish.com/resources/sdk/platform-sdk.zip">http://platform.zzish.com/resources/sdk/platform-sdk.zip</a> 
+			<hr>
+			<h6>Step 2 - Unzip file</h6>
+			<p>The file contains two libraries; the e-mbaas-asdor jar file and Google gson library.</a> 
+
+			<hr>
+
+			<h6>Step 3 - Import the e-mbaas-ador library into your project's workspace</h6>
+			<p>Simply drag the two libraries into the libs folder of your Android project. Ensure "Copy File" is selected in the dialog box that comes up</p>
+
+			<hr>
+
+
+			<h6>Step 4 - Associate the library as a dependency of your project</h6>
+			<p>With your project selected, from the File menu, select Properties -> Android -> Add -> and then select e-mbaas-ador library.</p>
+
+			<hr>
+
+
+			<h6>Step 5 - Ensure you have the correct permissions in your AndroidManifest.xml</h6>
+			<p>In order for the library to work, you need to ensure that you're requesting the following permissions in your AndroidManifest.xml. This may already exists because of your current app requirements.</p>
+			
+			<div class="code">
+			<p>&lt;uses-permission   android:name="android.permission.INTERNET" /&gt; <br/> 
+			<p>&lt;uses-permission   android:name="android.permission.ACCESS_NETWORK_STATE" /&gt;  
+			</div>
+
+			<hr>
+
+
+			<h3>Initializing the SDK</h3>
+			<p>In order to access the SDK, you will instantiate the <a href="/guide/api-android#AnalyticsService">AnalyticsService</a> class using its own constructor <a href="/guide/api-android#init">init</a>. You will be required to submit two parameters, an android Context (e.g. Activity) and the e-mbaas-ador Application Id which you would have received after registering on the zzish website <a href="http://platform.zzish.com/register">http://platform.zzish.com/register</a>.</p>
+			
+			<div class="code">
+			<p> import uk.co.zzish.platform.sdk.service.AnalyticsService;<br/> </p>
+			<p> &#46;&#46;&#46;<br/> </p>
+			<p> //this is passed as a parameter under the assumption that the service is being instantiated within an Android Activity<br/> </p>
+			<p> AnalyticsService service = AnalyticsService.init(this,"2sdfs3f3");  </p>
+			</div>
+			<h3>Making your first call</h3>
+			<p>Once you have instantiated the service, you can use the SDK to track two types of events; Activities and Actions. </p>
+
+			<h3>Measuring Activities</h3>
+
+			<p>Activities represent a time-based event with a start and end time. You can also pause/resume the activity. A perfect example of an activity is a Game. When the user chooses to start a type of game, you simply call <a href="/guide/api-android#startActivity">startActivity</a> passing in a unique name describing the type of activity (e.g "SinglePlay Level 5"and a unique userId of the user executing the activity. The userId is a developer based Id and its sole purpose is to identify the user within the SDK. The method will return an id that can be used in the lifecycle of the activity: (e.g. <a href="/guide/api-android#pauseActivity">pauseActivity(id)</a>, <a href="/guide/api-android#resumeActivity">resumeActivity(id)</a> and <a href="/guide/api-android#stopActivity">stopActivity(id)</a>).</p>
+
+			<div class="code">
+			<p> long id = Service.startActivity("SinglePlay Level 5","234234")&#59 </p>
+			<p> service&#46;stopActivity(id)&#59  </p>
+			</div>
+
+			<h3>Logging Actions</h3>
+			<p>Actions represent events that are executed during an activity. Examples include answering a question, viewing a video, clicking on a button. Similar to an activity you can specify a unique name to identify the action. The method is <a href="/guide/api-android#logAction">logAction</a> which returns a <a href="/guide/api-android#LoggedAction">LoggedAction</a> method which allows you to further customise the action.</p>
+			<p>The <a href="/guide/api-android#LoggedAction">LoggedAction</a> object can be used to add further attributes to and then saved using the updateAction method. There are specific attributes that can be set as well as up to 5 custom attributes. Simplye use the <a href="/guide/api-android#loggedActionSetAttribute">setAttributes(name,value)</a> and and <a href="/guide/api-android#loggedActionRemoveAttribute">removeAttribute(name)</a> methods</p>
+			
+			<div class="code">
+			<p>import uk.co.zzish.platform.sdk.view.LoggedAction;<br/></p>
+			<p>&#46;&#46;&#46;<br/></p>
+			<br/>
+			<p>long id = service.startActivity("SinglePlay Level 5","234234")&#59;<br/></p>
+			<p>LoggedAction action = service.logAction(id, "Question1")&#59<br/></p>
+			<p>LoggedAction action2 = service.logAction(id, "Question2")&#59<br/></p>
+			<p>action&#46;setScore(100)&#5;<br/></p>
+			<p>action&#46;setDuration(200)&#5;<br/></p>
+			<p>action&#46;setCorrect(Boolean.TRUE)&#5;<br/></p>
+			<p>action.setAttribute("number of tries","3")&#5;<br/></p>
+			<p>service.stopActivity(id)&#59</p>
+			</div>
+			<h3>Managing user attributes</h3>
+			<p>The library provides two functions to manage <a href="/guide/api-android#User">Users</a>; <a href="/guide/api-android#getUser">getUser(String id)</a> and <a href="/guide/api-android#updateUser">updateUser(User user)</a>. The former method allows you access to a User object where you can save various attributes about a User and the latter allows the saving of that User object. Whenever a new id is used, a new <a href="/guide/api-android#User">User</a> object is created.</p>
+			
+			<div class="code">
+			<p>import uk.co.zzish.platform.sdk.view.User;<br/></p>
+			<p>&#46;&#46;&#46;.<br/></p>
+			<p>User user = service.getUser("12345")&#59;<br/></p>
+			<p>user.setGender(User.MALE)&#59;<br/></p>
+			<p>action.setAttribute("Shirt colour","Yellow")&#59;<br/></p>
+			<p>service.updateUser(user)&#59;<br/></p>
+			</div>
+			<p>On top of generic attributes, a <a href="/guide/api-android#User">User</a> object can save up to 5 custom attributes. Simply use the <a href="/guide/api-android#userSetAttribute">setAttributes(name,value)</a>  and <a href="/guide/api-android#userRemoveAttribute">removeAttribute(name)</a> methods. The value can be any simple object (e.g. primitive types or String). </p>
+			<p>For more information, please refer to the SDK documentation.</p>
+			<h3>Exiting the App</h3>
+			<p>When exiting app, be sure to call the <a href="/guide/api-android#finish">finish</a> service. This will close any user sessions</p>
+			</div>
+
+
+		p &nbsp;
+

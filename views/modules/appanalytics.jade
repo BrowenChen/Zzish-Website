@@ -1,0 +1,116 @@
+extends ../promotion_layout
+
+block content
+
+	p &nbsp;
+
+	div.row.main_cleanformatting_invert
+
+		p(style="color: #000000;") <a href="/modules" style="color: #000000;"> Modules </a> > App Analytics
+
+		
+
+		h1(align="center" style="margin-bottom: 20px; margin-top: -50px; font-size:75px;") App Analytics
+
+		div.small-8.large-centered.columns
+			div.large-2.columns#module2
+				a(href="/modules/backtoschool")
+					img(src="/img/icons/circle-appanalytics.png")
+
+			div.large-2.columns#module1
+				a(href="/modules/adaptivealgorithms")
+					img(src="/img/icons/circle-adaptivealgorithms.png")
+
+			div.large-2.columns#module5
+				a(href="/modules/gamification")
+					img(src="/img/icons/circle-gamification.png")
+
+			div.large-2.columns(style="margin-bottom: 20px;")#module6
+				a(href="/modules/learninganalytics")
+					img(src="/img/icons/circle-learninganalytics.png")
+
+			div.large-2.columns#module3
+				a(href="/modules/classroom")
+					img(src="/img/icons/circle-classroom.png")
+
+			div.large-2.columns#module4
+				a(href="/modules/contentmodule")
+					img(src="/img/icons/circle-contentmodule.png")
+		
+		p &nbsp;
+	
+		div.small-10.large-centered.columns
+
+			p Zzish App Analytics allows you to measure the engagement and efficacy of your learning app, iterate to improve these metrics and increase the revenue from your app.  You can be up and running in under 30 minutes it’s so easy to use.
+
+
+			hr
+
+			h2 Key Features
+
+			div.main_formatting.small-10.large-centered.columns
+				ol
+					li Engagement stats for:
+					ol
+						li Conversion to active users
+						li Active user sessions
+					li Efficacy stats for:
+					ol
+						li	Improvement for repeated activities
+						li Time to reach activity levels
+						li Fact retention over time
+					li Filters to compare stats by demographic or cohort for A/B testing
+
+
+
+			hr
+
+			h1(align="center") Vision
+
+			p Zzish App Analytics is the first analytics product designed specifically for education and learning apps, allowing developers to measure both the engagement and efficacy of apps for the first time.   
+
+			p Measuring these two metrics and iterating to improve them is a key way to increase the value of and revenue from your app.  There are a number of case studies from mobile gaming that show that when you increase the engagement of a mobile app you increase the in-app purchase revenue, but for mobile learning apps, both engagement (how much time people spend using the app) and efficacy (how much people learn for the time they spend) are both important factors that drive value to the learner and thus revenue.
+
+			p The key difference between Zzish App Analytics and other app analytics products such as Google Analytics, Flurry and Mix Panel is that events sent to our server contain structured data enabling us to present the appropriate statistics for learning apps without you needing to post process the data.    Zzish App Analytics understands the concepts of “Activities” that correspond to lessons, exercises or quizzes, and “Actions”, that correspond to answering a question or completing a specific component of an activity.   Actions always have one or more of the following metrics associated with them corresponding to how well a student has performed in completing the action; the time to complete the action, whether the action was successful or not, and how many points were awarded for the action.  Moreover Activities automatically aggregate the metrics from the actions into overall Activity metrics.
+
+			p Zzish app analytics is as easy to use as other analytics products, simply add the SDK to your code base, add fire off activity and action events in your code at appropriate places.
+
+			p All stats can be filtered to show them by demographic or cohort for A/B testing.
+			
+			h3 Engagement Stats
+
+			p Key engagement statistics that Zzish App Analytics produces include:
+
+			ol
+				li Bounce rate: the proportion of app installs where a learner opens your app once only and does not start an activity
+				li Activity start rate: the proportion of app installs where a learner starts a first activity
+				li Activity complete rate: the proportion of app installs where a learner completes a first activity
+
+			p These first three stats are important stats that can help you identify problems with your app and activities and let you test different hypotheses to increase complete rate.
+
+			p Other engagement statistics include:
+
+			ol
+				li Average number of sessions per month: how many times active learners open your app per month on average.
+				li Average number of minutes per session: how many minutes active learners spend using your app in a session
+				li Average time per month: how much time active learners use the app per month
+
+			p These stats let you iterate on features and content that increase the engagement of active users.
+			
+			h3 Efficacy Stats
+
+			p Key efficacy stats that Zzish App Analytics computes depends on the nature of your app.  
+
+			p For apps where the learners repeat activities and are expected to improve with each iteration:
+
+			li The average improvement in activity metrics for learners for each extra iteration of the activity.
+
+			p For apps where learners work linearly through levels of activities:
+
+			li The average length of time or sessions taken to reach each level.
+
+			p For apps where learners memorise facts (such as vocabulary learning):
+
+			li The average number of facts memorised over a given number of sessions or time period.
+
+			p Measuring these stats lets you iterate on product features and content to help improve their values and so make your app more effective at helping people learn.

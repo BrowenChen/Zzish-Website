@@ -1,0 +1,241 @@
+
+
+{
+	"apiVersion": "0.0.1",
+	"swaggerVersion": "1.2",
+	"basePath": "http://10.2.199.57:8081/platform-api/api/",
+	"resourcePath": "/users",
+	"produces": [
+		"application/json"
+		],
+	"consumes": [
+            "application/json"
+        ],	
+	"apis":[
+		{
+			"path": "/users",
+			"operations": [
+				{
+					"method": "POST",
+					"summary": "Registers a new user",
+					"nickname": "registerUser",
+					"parameters": [
+						{
+							"name": "id (URL)",
+							"description": "The user Id returned from users response",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+						{
+							"name": "appId",
+							"description": "Zzish e-mbass-sador application id",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+						{
+							"name": "deviceId",
+							"description": "The activityId returned from devices response",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+						{
+							"name": "userId",
+							"description": "Developer defined userId. Used to bridge with other systems.",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},						
+
+						{
+							"name": "name",
+							"description": "Name of User",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+						{
+							"name": "dob",
+							"description": "Date of Birth in Long Format",
+							"required": true,
+							"type": "Long",
+							"paramType": "body"
+						},
+						{
+							"name": "Gender",
+							"description": "0 - Unspecified, 1 - Male, 2 - Female",
+							"required": true,
+							"type": "Long",
+							"paramType": "body"
+						},												
+						{
+							"name": "Latitude",
+							"description": "The latitude of the user's location",
+							"required": true,
+							"type": "Float",
+							"paramType": "body"
+						},			
+
+						{
+							"name": "Longitude",
+							"description": "Longitude of the user's location",
+							"required": true,
+							"type": "Float",
+							"paramType": "body"
+						},		
+						{
+							"name": "Attributes",
+							"description": "An array of up to 5 attributes with name and value attributes",
+							"required": true,
+							"type": "Array",
+							"paramType": "body"
+						}
+					],
+					"errorResponses": [
+						{
+							"code":101,
+							"reason":"Missing appId"
+						},
+
+						{
+							"code":102,
+							"reason": "Invalid appId"
+						},
+						{
+							"code":201,
+							"reason": "Missing deviceId"
+						},
+
+						{
+							"code":202,
+							"reason": "Invalid deviceId"
+						}						
+					]						
+				}
+			]
+		},
+
+		{
+			"path": "/users{id}",
+			"operations": [
+				{
+					"method": "POST",
+					"summary": "Updates an existing user",
+					"nickname": "updateUser",
+					"parameters": [
+						{
+							"name": "id (URL)",
+							"description": "The user Id returned from users response",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+						{
+							"name": "appId",
+							"description": "Zzish e-mbass-sador application id",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+						{
+							"name": "deviceId",
+							"description": "The activityId returned from devices response",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+						{
+							"name": "userId",
+							"description": "Developer defined userId. Used to bridge with other systems.",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},						
+
+						{
+							"name": "name",
+							"description": "Name of User",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+						{
+							"name": "dob",
+							"description": "Date of Birth in Long Format",
+							"required": true,
+							"type": "Long",
+							"paramType": "body"
+						},
+						{
+							"name": "Gender",
+							"description": "0 - Unspecified, 1 - Male, 2 - Female",
+							"required": true,
+							"type": "Long",
+							"paramType": "body"
+						},												
+						{
+							"name": "Latitude",
+							"description": "The latitude of the user's location",
+							"required": true,
+							"type": "Float",
+							"paramType": "body"
+						},			
+
+						{
+							"name": "Longitude",
+							"description": "Longitude of the user's location",
+							"required": true,
+							"type": "Float",
+							"paramType": "body"
+						},		
+						{
+							"name": "Attributes",
+							"description": "An array of up to 5 attributes with name and value attributes",
+							"required": true,
+							"type": "Array",
+							"paramType": "body"
+						}					
+
+					],
+					"errorResponses": [
+						{
+							"code":101,
+							"reason":"Missing appId"
+						},
+
+						{
+							"code":102,
+							"reason": "Invalid appId"
+						},
+						{
+							"code":301,
+							"reason": "Missing activityId"
+						},
+
+						{
+							"code":302,
+							"reason": "Invalid activityID"
+						}						
+					]						
+
+				}	
+
+
+			]
+		}		
+	],
+	"models": {
+		"User": {
+			"id": "user",
+			"properties": {
+				"id": {
+					"type": "string"
+					}
+				}
+		}
+	}
+}
+
+

@@ -1,0 +1,344 @@
+extends profile_layout
+
+block name
+	a(href="/profile/home" style="color: #FFFFFF; font-family: 'Lato', sans-serif;") #{name}
+
+block content	
+	div.row
+		div.large-2.columns
+			p 
+
+		div.large-8columns
+			form(align="center")#msform
+
+				h1(align="center" style="color: #FFFFFF; font-family: 'Lato', sans-serif;") Create App
+
+				hr
+
+				ul#progressbar
+					li.active Basics
+					li Chose Operating System
+					li Download SDK
+
+				fieldset
+					h2.fs-title Basics
+
+					input(type="text" name="appname" placeholder="App Name").inputtext#input_appname
+
+					div.ui-widgets
+						input(type="text" name="subject" id="tags_subject" placeholder="Subject Area").inputtext
+
+					select(name="audience")#input_audience
+						option(value="-") Select Target Audience
+						option(value="Preschool") Preschool
+						option(value="Primary/Elementary") Primary/Elementary
+						option(value="Secondary/High School") Secondary/High School
+						option(value="Tertiary/University/College") Tertiary/University/College
+						option(value="Adult") Adult
+
+					select(name="learning_style" onchange='on_select()')#learning_style_select
+						option(value="-") Learning style
+						option(value="Open Activity Selection") Open Activity Selection
+						option(value="Linear Level Progression") Linear Level Progression
+						option(value="Fact memorisation") Fact memorisation
+						option(value="Fact memorisation") Other
+
+					input(type="hidden" name="learning_style_other" placeholder="Learning Style - Other").inputtext#learning_style_input
+
+
+					input(type="button" name="next" value="next").next.inputtext.action-button
+
+				fieldset
+					h2.fs-title Chose Operating System
+					div.row(style="margin-top: 20px;")
+						div.large-4.columns#android_icon
+							img(src="/img/icons/android.png" )
+						div.large-4.columns#ios_icon
+							img(src="/img/icons/apple.jpeg" )
+						div.large-4.columns#rest_icon
+							img(src="/img/icons/internet.png" )
+
+					
+
+					div.row.styletext(style="margin-top: 20px;")
+						p Don't worry you can select more operating systems later
+
+					input(type="button" name="previous" value="previous").previous.action-button.inputtext
+					input(type="button" value="next").next.action-button#select_link
+
+
+				fieldset
+					h2.fs-title Download SDK
+
+					p.styletext Here's the link:
+						a(href="" style="color: #74B4FE;").styletext#sdk_link -
+
+					p#appid App id: 
+
+					div(style="visibility: hidden").styletext#iosInstruction
+						center
+							p Instructions
+
+						p
+							a(href="/api_docs/ios/guide#option1" style="color:#000000;") Option 1 - Extending PlatformViewController <br>
+							a(href="/api_docs/ios/guide#option2" style="color:#000000;") Option 2 - Custom initialisation
+
+					a(href="")#guide_link
+						button.action-button.submitbutton Game on!
+
+				fieldset
+					input(type="radio" name="ios" value="true")#radio_ios
+					input(type="radio" name="android" value="true")#radio_android
+					input(type="radio" name="rest" value="true")#radio_rest 
+					
+					
+		div.large-3.columns(style="background-color:#000000; opacity:0.6; border-radius: 20px 20px 20px 20px; margin-top: 150px; margin-left: 10px; width:200px; height:350px; display:none;")#infobox
+			h4(align="center" style="color: #FFFFFF; font-family: 'Lato', sans-serif;")#infotitle Gamification
+
+			hr
+			center
+				img(src="/img/icons/circle-gamification.png" width=75 height=75)#infoimage
+
+			hr
+ 
+			p(align="center" style="color: #FFFFFF; font-family: 'Lato', sans-serif;")#infotext
+
+	div.row
+		div(title="Remember!" style="visibility: hidden;")#dialog
+			p We'll be giving away two iPads to two lucky winners who are in the first 100 developers to start using our platform.  Just deploy our SDK in your app and start using the Zzish platform for a chance to win!
+
+
+
+
+	script.
+		//welcome message
+		$( window ).load(function() {
+			$( "#dialog" ).attr("style", "visibility: visible;");
+			var reg = getUrlVars()["reg"];
+			if(reg == 'true'){
+				$( "#dialog" ).dialog();
+			}
+		});
+		
+		function getUrlVars() {
+			var vars = {};
+			
+			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+				vars[key] = value;
+			});
+			
+			return vars;
+		}
+
+
+		//Sending app Data
+					
+		$('#select_link').click(function(e){
+			e.preventDefault();
+			console.log('select_link clicked');
+
+			var data = {};
+			data.appname =  document.getElementById('input_appname').value;
+			data.subject =  document.getElementById('tags_subject').value;
+
+			var i =  document.getElementById('input_audience');
+			data.audience = i.options[i.selectedIndex].value;
+	
+			var j = document.getElementById('learning_style_select');
+			data.learning_style = j.options[j.selectedIndex].value;
+			
+			if(!$('#radio_rest').checked) data.rest =  "rest";
+			if(!$('#radio_ios').checked)	data.ios =  "iOS";
+			if(!$('#radio_android').checked)	data.android =  "android";
+
+			console.log(data);
+
+			
+
+			$.ajax({
+				type: 'POST',
+				data: JSON.stringify(data),
+				contentType: 'application/json',
+				url: 'http://www.zzish.com/profile/create_app',
+				success: function(data) {
+					console.log('success');
+					console.log(JSON.stringify(data));
+					if(data == "0") $('#appid').text('App name Taken');
+					else $('#appid').text('App id: ' + data);
+				}
+
+			
+			});
+
+			
+		});				
+		
+
+		//Learning Style selection box
+		function on_select(){
+			if($( "#learning_style_select option:selected" ).text() == "Other"){
+				$('#learning_style_input').attr("type", "text");
+				$('#learning_style_select').attr("style", "display:none");
+			}
+				
+		}
+			
+
+		//Predictive text
+		$(function() {
+			var availableTags = [
+				"Maths",
+				"English",
+				"Science",
+				"Foreign Languages",
+				"French",
+				"German",
+				"Spanish",
+				"Japanese",
+				"Chinese",
+				"Other",
+				"Science",
+				"Brain Training",
+				"Driving"
+			];
+			$( "#tags_subject" ).autocomplete({
+					source: availableTags
+				});
+		});
+
+		//select operating system
+		$('#android_icon').click(function () {  
+			document.getElementById('radio_android').checked=true;
+			$('#android_icon').attr("style", "border:1px solid; border-radius: 20px 20px 20px 20px; border-color: #74B4FE; ");
+
+			document.getElementById('radio_ios').checked=false;
+			document.getElementById('radio_rest').checked=false;
+
+			$('#ios_icon').attr("style", "");
+			$('#rest_icon').attr("style", "");
+
+			//Change link
+			$('#sdk_link').html(" Click me!");
+			$('#sdk_link').attr("href", "http://platform.zzish.com/resources/sdk/platform-sdk.zip");
+
+			$('#guide_link').attr("href", "/api_docs/android/guide");
+
+			$('#iosInstruction').attr("style", "visibility: hidden;");
+
+		});
+		$('#ios_icon').click(function () {  
+			document.getElementById('radio_ios').checked=true;
+			$('#ios_icon').attr("style", "border:1px solid; border-radius: 20px 20px 20px 20px; border-color: #74B4FE; padding-top: 5px; padding-bottom: 5px;");
+
+			document.getElementById('radio_android').checked=false;
+			document.getElementById('radio_rest').checked=false;
+			
+			$('#iosInstruction').attr("style", "");
+
+			$('#android_icon').attr("style", "");
+			$('#rest_icon').attr("style", "");
+
+			//Change link
+			$('#sdk_link').html(" Click me!");
+			$('#sdk_link').attr("href", "http://platform.zzish.com/resources/sdk/PlatformSDK.framework.zip");
+
+			$('#guide_link').attr("href", "/api_docs/ios/guide");
+		});
+		$('#rest_icon').click(function () {  
+			
+			document.getElementById('radio_rest').checked=true;
+			$('#rest_icon').attr("style", "border:1px solid; border-radius: 20px 20px 20px 20px; border-color: #74B4FE; padding-top: 7px; padding-bottom: 7px;");
+
+			document.getElementById('radio_android').checked=false;
+			document.getElementById('radio_ios').checked=false;
+
+			$('#android_icon').attr("style", "");
+			$('#ios_icon').attr("style", "");
+
+			//Change link
+			$('#sdk_link').html(" Click me!");
+			$('#sdk_link').attr("href", "http://platform.zzish.com/register");
+
+			$('#guide_link').attr("href", "/api_docs/rest/guide");
+
+			$('#iosInstruction').attr("style", "visibility: hidden;");
+		});
+
+		//jQuery time Form Animation
+		var current_fs, next_fs, previous_fs; //fieldsets
+		var left, opacity, scale; //fieldset properties which we will animate
+		var animating; //flag to prevent quick multi-click glitches
+
+		$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+			
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+			
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+			
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+				step: function(now, mx) {
+					//as the opacity of current_fs reduces to 0 - stored in "now"
+					//1. scale current_fs down to 80%
+					scale = 1 - (1 - now) * 0.2;
+					//2. bring next_fs from the right(50%)
+					left = (now * 50)+"%";
+					//3. increase opacity of next_fs to 1 as it moves in
+					opacity = 1 - now;
+					current_fs.css({'transform': 'scale('+scale+')'});
+					next_fs.css({'left': left, 'opacity': opacity});
+				}, 
+				duration: 800, 
+				complete: function(){
+					current_fs.hide();
+					animating = false;
+				}, 
+				//this comes from the custom easing plugin
+				easing: 'easeInOutBack'
+			});
+		});
+
+		$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+			
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+			
+			//de-activate current step on progressbar
+			$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+			
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+				step: function(now, mx) {
+					//as the opacity of current_fs reduces to 0 - stored in "now"
+					//1. scale previous_fs from 80% to 100%
+					scale = 0.8 + (1 - now) * 0.2;
+					//2. take current_fs to the right(50%) - from 0%
+					left = ((1-now) * 50)+"%";
+					//3. increase opacity of previous_fs to 1 as it moves in
+					opacity = 1 - now;
+					current_fs.css({'left': left});
+					previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+				}, 
+				duration: 800, 
+				complete: function(){
+					current_fs.hide();
+					animating = false;
+				}, 
+				//this comes from the custom easing plugin
+				easing: 'easeInOutBack'
+			});
+		});
+
+		$(".submit").click(function(){
+			return false;
+		})

@@ -1,0 +1,66 @@
+extends layout
+
+block content
+
+	div.row
+		
+		hr
+
+		h1(align="center") Classroom 1
+
+		hr
+
+		div.row
+			div.small-9.columns
+				h3 Name: #{classrooms.name}
+
+				h3 Year: #{classrooms.year}
+
+				hr
+
+				h3 Students
+
+				ul#students 
+				for code in classrooms.memberIds
+					li #{code}
+
+			div.small-3.columns
+				h3 Add Student
+
+				input(type="text" name="student" placeholder="Code")#add_student
+
+	script.
+
+		$('#add_student').keyup(function(e){
+			if(e.keyCode == 13)
+			{
+				var data = {};
+
+				data.code = document.getElementById('add_student').value;
+				console.log(data.code);
+				if(data.code != ""){
+					//ADD TO UL
+					var ul = document.getElementById("students");
+					var li = document.createElement("li");
+					li.appendChild(document.createTextNode(data.code));
+					ul.appendChild(li);
+
+					//AJAX request
+					$.ajax({
+						type: 'POST',
+						data: JSON.stringify(data),
+						contentType: 'application/json',
+						url: 'http://www.zzish.com/teachers/classroom/#{classrooms._id}/addstudents',
+						//url: 'http://localhost:3000/teachers/classroom/#{classrooms._id}/addstudents',
+						success: function(data) {
+							console.log('success' + data.code);
+							document.getElementById('add_student').value = "";
+							
+
+						}
+					
+					});
+				}
+			}
+		});
+

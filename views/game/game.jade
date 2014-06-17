@@ -1,0 +1,58 @@
+extends layout
+
+block content
+	div.row
+		p <br>
+
+		div.row
+			div
+				p 
+
+		div.row
+			center
+				h2 MOST AWESOME MULTIPLICATION GAME EVAR!
+		p <br>
+
+
+		div.row
+				div.row
+
+					div.columns(style="height: 70px; width: 70px;")
+						h1(align="center") 
+
+					- for (var i = 0; i < 14 ; ++i) {
+						-if(i != 13) {
+						div.columns(style="height: 70px; width: 70px;")
+							h1(align="center") #{i}
+						- } else {
+						div.columns(style="height: 70px; width: 70px;")
+							h1(align="center") 
+						- }
+					- }
+					
+
+				- for (var i = 0; i < 13 ; ++i) {
+
+				div.row
+					div.columns(style="height: 70px; width: 70px;")
+						h1(align="center") #{i}
+
+					- for (var j = 0; j < 13; ++j) {
+						
+					div.columns(id="block#{j}x#{i}y", style="height: 70px; width: 70px;", onclick="selectBlock('block#{j}x#{i}y', '#{j}','#{i}');").block
+						center
+							input(id="question#{j}x#{i}y", size="1", style="margin-top: 10px; width: 50px; heigth: 40px; font-size:30px;")
+					- }
+					p <br>
+				- }
+
+		p <br>
+
+		div.row
+			div.small-4.large-centered.columns
+
+				center
+					button.button.round(onclick="checkSolutions()", style="margin-right: 10px; margin-left: 35px;") Finish
+
+
+

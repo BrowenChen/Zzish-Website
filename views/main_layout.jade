@@ -1,0 +1,89 @@
+doctype html
+html
+	head
+		title= title
+
+		block css
+			link(rel='stylesheet', href='/css/foundation.css')
+			link(rel='stylesheet', href='/css/register.css')
+			link(rel='stylesheet', href='/css/style.css')
+
+			link(href='http://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css')
+
+		block js
+			script(src="/js/vendor/modernizr.js")
+			script(src="/js/vendor/jquery.js")
+			script(src="/js/foundation.min.js")
+
+
+
+			script(src="http://thecodeplayer.com/uploads/js/jquery.easing.min.js")
+
+
+
+	body
+		nav.top-bar
+			ul.title-area
+				li.name
+					h1 Zzish
+
+			section.top-bar-section
+				ul.right
+					li
+						a(href="http://blog.zzish.com") Blog
+					li
+						a(href="/prices") Prices
+
+					li
+						a(href="/api_docs") API & Docs
+
+					li
+						a(href="/modules") Modules
+
+					li
+						a(href="/login") Sign In
+
+					li
+						a(href="mailto:developers@zzish.com") Contact Us
+
+		
+		block content
+		
+
+		footer.row.footer_format
+			hr
+
+			div.row
+
+				div.large-6.columns
+					Zzish
+
+				div.large-6.columns
+					ul.inline-list.right
+						li
+							a(href="/privacypolicy") Privacy Policy
+						li
+							a(href="/aboutus") About Us
+						li
+							a(href="mailto:developers@zzish.com") Contact Us
+
+			
+
+		//- Required to load Foundation:
+		script.
+			$(document).foundation();
+
+		script.
+			var addthis_config = {"data_track_addressbar":true};
+			var addthis_config = {services_exclude: 'print'};
+
+		script.
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-2402555-20', 'zzish.com');
+			ga('send', 'pageview');
+
+		script(src="//s7.addthis.com/js/300/addthis_widget.js#pubid=edwiles")

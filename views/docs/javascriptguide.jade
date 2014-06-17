@@ -1,0 +1,73 @@
+extends docs_layout
+
+block content
+	div.row.main_clearformatting_invert
+		hr
+
+		h1(align="center") #{platform}-#{type}
+
+		hr
+
+		p <a href="/api_docs" style="color: #000000;"> #{platform} </a> > <a href="/api_docs/#{platform_path}" style="color: #000000;"> #{type} </a>
+
+		div.small-8.large-centered.columns.api_docs
+			h3 Using Zzish in javascript
+			
+			hr
+
+			h4 Option 1 - Node.js
+
+			p Quite simply use the node package manager to install the module.
+
+			div.code
+				npm install zzish
+
+			p Now you're ready to start using zzish!
+
+			hr
+
+			h4 Option 2 - Javascript in browser
+
+			p In order to use the zzish API in the broswer you've got to include the file in the header section of the html document.
+
+			div.code
+				p &lt;head&gt;
+				p &lt;script src="js/zzish.js"&gt;&lt;/script&gt;
+				p &lt;/head&gt;
+
+			p Now you're ready to start using zzish!
+
+
+			h3 Zzish in Node.js
+
+			h4 Initializing the SDK
+
+			p In order to access the SDK you will need to create a new zzish instance and instantiate the API with an AppId, provided to you when you registered.
+
+			div.code
+				p z = new Zzish();
+				p z.init({appId:'<APP_ID>', baseUrl: <baseurl> });
+
+			p This will have established which application is being used and which server it is pointing at. Next up is to establish the deviceId, which is required for back end authentication when using the zzish platform. 
+
+			div.code
+				p z.devices.create({name: 'node-device'}, function(err, res) {
+				p	callback(res);
+				p });	
+
+			p Placing a callback with the response is optional, how you implement the code is entirely up to you. The response object will contain all relevent information about the device. Now that the device has been created we can start to use the zzish platform for more interseting applications.
+
+
+
+
+
+
+
+
+			h3 Zzish in front end javascript
+
+
+		p &nbsp;
+
+
+

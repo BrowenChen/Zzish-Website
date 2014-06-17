@@ -1,0 +1,103 @@
+extends profile_layout
+
+block javascript
+	script()
+
+block content
+
+
+	div.row
+		hr
+		h1(align="center") Settings
+		hr
+
+	// NONE KPI TABLE
+	div.row
+		div.row
+			div.small-3.columns
+				div.small-4.columns
+					label(for="right-label" class="right inline") Topic
+				div.medium-8.columns
+					select
+						option(value="actions") Actions
+						option(value="purchases") purchases
+						option(value="kpi") KPIs
+						option(value="activities") Activities
+			div.small-3.columns
+				div.small-4.columns
+					label(for="right-label" class="right inline") Graph Type
+				div.medium-8.columns
+					select
+						option(value="line") Line
+						option(value="bar") Bar
+						option(value="pie") Pie
+						option(value="figure") Figure
+			div.small-3.columns
+				div.small-4.columns
+					label(for="right-label" class="right inline") x axis
+				div.medium-8.columns
+					select
+						option(value="line") Line
+						option(value="bar") Bar
+						option(value="pie") Pie
+						option(value="figure") Figure
+			div.small-3.columns
+				div.small-4.columns
+					label(for="right-label" class="right inline") y axis
+				div.medium-8.columns
+					select
+						option(value="line") Line
+						option(value="bar") Bar
+						option(value="pie") Pie
+						option(value="figure") Figure
+
+		div.row
+			div.small-2.columns
+				label(for="right-label" class="right inline") Start Date
+			div.medium-4.columns
+				div.small-6.columns
+					select#startmonth
+						option(value="January") January
+						option(value="Febuary") Febuary
+						option(value="March") March
+						option(value="May") May
+						option(value="June") June
+						option(value="July") July
+						option(value="August") August
+						option(value="September") September
+						option(value="October") October
+						option(value="November") November
+						option(value="December") December
+				div.medium-6.columns
+						select#startyear
+							option(value="2014") 2014
+							option(value="2013") 2013
+							option(value="2012") 2012
+							option(value="2011") 2011
+
+	
+			div.small-2.columns
+				label(for="right-label" class="right inline") End Date
+			div.medium-4.columns
+				div.small-6.columns
+					select#endmonth
+						option(value="January") January
+						option(value="Febuary") Febuary
+						option(value="March") March
+						option(value="May") May
+						option(value="June") June
+						option(value="July") July
+						option(value="August") August
+						option(value="September") September
+						option(value="October") October
+						option(value="November") November
+						option(value="December") December
+				div.medium-6.columns
+						select#endyear
+							option(value="2014") 2014
+							option(value="2013") 2013
+							option(value="2012") 2012
+							option(value="2011") 2011
+
+
+	//KPI TABLS

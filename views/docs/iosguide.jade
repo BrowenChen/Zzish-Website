@@ -1,0 +1,110 @@
+extends docs_layout
+
+block content
+	div.row
+		hr
+
+		h1(align="center") #{platform}-#{type}
+
+		hr
+
+		p <a href="/api_docs" style="color: #000000;"> #{platform} </a> > <a href="/api_docs/#{platform_path}" style="color: #000000;"> #{type} </a>	
+
+		div.small-8.large-centered.columns.api_docs
+
+				<h3>Installing the framework</h3>
+
+				<hr>
+
+				<h6>Step 1 - Download the latest Zzish e-mbaas-ador framework</h6>
+				<p>Here's the link: <a href="http://platform.zzish.com/resources/sdk/PlatformSDK.framework.zip">http://platform.zzish.com/resources/sdk/PlatformSDK.framework.zip</a></p>
+				
+				<hr>
+
+				<h6>Step 2 - Unzip file</h6>
+				<p>Unzip the downloaded file using your preferred compression tool</p>
+
+				<hr>
+
+				<h6>Step 3 - Import the e-mbaas-ador library into your project's workspace</h6>
+				<p>Simply Drag the PlatformSDK.framework folder into your Xcode project and drop it your Project Folder</p>
+
+				<hr>
+
+				<h6>Step 4 - Add other frameworks</h6>
+
+
+				<p>Click on your project in the left bar. Click on the Build Phases Tab. Under Link Binary with Libraries, ensure you have libsqlite3.0.dylib and SystemConfiguration framework in the list. Click on the + and select the file if you don't.</p>
+				
+				<hr>
+
+				<h3>Initializing the SDK</h3>
+
+				<h6 id="option1"> <b> Option 1 - Extending PlatformViewController </b> </h6>
+
+					
+				<p>1. Create a property list called platformsettings.plist</p>
+
+				<p>2. Add the key "APPLICATION_ID" with the value that you would have received when you create an app.</p>
+
+				<p>3. Extend all your view controllers using PlatformViewController.</p>
+
+				<p>4. You can access the SDK by calling super.sdk (eg: [super.sdk startActivityWithName:@"Level 1"];) </p>
+
+				</ol>
+
+				<h6 id="option2"> <b> Option 2 - Custom Initialisation </b> </h6>
+
+				<p>In order to access the SDK, you will instantiate the <a href="/api_docs/ios/api#AnalyticsService">AnalyticsService</a> class using its own constructor <a href="/api_docs/ios/api#init">initWithApplicationId</a>. You will be required to submit the e-mbaas-ador Application Id which you would have received after registering on the zzish website (<a href="http://platform.zzish.com/register">http://platform.zzish.com/register</a>).</p>
+
+				<div class="code">
+				<p>#import "PlatformSDK/AnalyticsService.h"<br/></p>
+				<p>&#46;&#46;&#46;<br/></p>
+				<p>AnalyticsService* sdk = [AnalyticsService initWithApplicationId:@"2sdfs3f3"];<br/></p>
+				</div>
+
+				<h3>Making your first call</h3>
+				<p>Once you have instantiated the service, you can use the SDK to track two types of events; Activities and Actions. </p>
+				<h3>Measuring Activities</h3>
+				<p>Activities represent a time-based event with a start and end time. You can also pause/resume the activity. A perfect example of an activity is a Game. When the user chooses to start a type of game, you simply call <a href="/api_docs/ios/api#startActivity">startActivity</a> passing in a unique name describing the type of activity (e.g "SinglePlay Level 5"and a unique userId of the user executing the activity. The userId is a developer based Id and its sole purpose is to identify the user within the SDK. The method will return an id that can be used in the lifecycle of the activity: (e.g. <a href="/api_docs/ios/api#pauseActivity">pauseActivity(id)</a>, <a href="/api_docs/ios/api#resumeActivity">resumeActivity(id)</a>  and <a href="/api_docs/ios/api#stopActivity">stopActivity(id)</a>).</p>
+
+				<div class="code">
+				<p>long id = [service startActivity:@"SinglePlay Level 5" forUser:@"234234"];<br/></p>
+				<p>[service stopActivity:id];</p>
+				</div>
+
+				<h3>Logging Actions</h3>
+				<p>Actions represent events that are executed during an activity. Examples include answering a question, viewing a video, clicking on a button. Similar to an activity you can specify a unique name to identify the action. The method is <a href="/api_docs/ios/api#logAction">logAction forActivity</a> which returns a <a href="/api_docs/ios/api#LoggedAction">LoggedAction</a> method which allows you to further customise the action.</p>
+				<p>The <a href="/api_docs/ios/api#LoggedAction">LoggedAction</a> object can be used to add further attributes to and then saved using the updateAction method. There are specific attributes that can be set as well as up to 5 custom attributes. Simply use the <a href="/api_docs/ios/api#loggedActionSetAttribute">setValue:(id)value forKey:(NSString *)key</a> and <a href="/api_docs/ios/api#loggedActionRemoveAttribute">removeAttribute:(NSString *)key</a> methods</p>
+
+				<div class="code">
+				<p>#import "PlatformSDK/LoggedAction.h"<br/></p>
+				<p>&#46;&#46;&#46;<br/></p>
+				<p>long id = [service startActivity:@"SinglePlay Level 5" forUser:@"234234"];<br/></p>
+				<p>LoggedAction* action = [service logAction:@"Question1" forActivity:id];<br/></p>
+				<p>LoggedAction* action2 = [service logAction:@"Question2" forActivity:id];<br/></p>
+				<p>action.score = 100.3;<br/></p>
+				<p>action.duration = 200;<br/></p>
+				<p>action.correct = false;<br/></p>
+				<p>[action setValue:@"4" forKey:@"Number of Clicks"];<br/></p>
+				<p>[service stopActivity:id];</p>
+				</div>
+
+				<h3>Managing user attributes</h3>
+				<p>The library provides two functions to manage <a href="/api_docs/ios/api#User">Users</a>: <a href="/api_docs/ios/api#getUser">getUser(String id)</a>  and <a href="/api_docs/ios/api#updateUser">updateUser(User user)</a>. The former method allows you access to a User object where you can save various attributes about a User and the latter allows the saving of that User object. Whenever a new id is used, a new User object is created by the SDK.</p>
+
+				<div class="code">
+				<p>User* user = [service getUser:@"12345"];<br/></p>
+				<p>user.gender = 1;<br/></p>
+				<p>[user setValue:@"Yellow" forKey:@"shirt colour"];<br/></p>
+				<p>[service updateUser:user];</p>
+				</div>
+
+				<p>On top of generic attributes, a <a href="/api_docs/ios/api#User">User</a> object can save up to 5 custom attributes. Simply use the <a href="/api_docs/ios/api#userSetAttribute">setValue:(id)value forKey:(NSString *)key</a> and <a href="/api_docs/ios/api#userRemoveAttribute">removeAttribute:(NSString *)key</a> methods. The value can be any simple object (e.g. primitive types or String). </p>
+				<p>For more information, please refer to the SDK documentation.</p>
+				<h3>Exiting the App</h3>
+				<p>When exiting app, be sure to call the <a href="/api_docs/ios/api#finish">finish</a> service. This will close any user sessions</p> 
+
+
+		p &nbsp;
+

@@ -1,0 +1,110 @@
+extends promotion_layout
+
+block content
+
+	div.main_cleanformatting_invert(style="background-color:#FFFFFF;")
+		div.row
+
+			hr
+
+			h1(align="center") Modules
+
+			hr
+
+			p We have six powerful modules that you can use independently or all together to add rich learning features to your app.  You can be up and running with all of them in just a few hours!
+
+			p &nbsp;
+
+	div(style="background-color:#6B2967;")
+		p &nbsp;
+		div.row.main_cleanformatting
+			div.large-6.columns
+				div.row(style="height: 200px;")
+					div.large-4.columns
+						a(href="modules/appanalytics")
+							img(src="/img/icons/circle-appanalytics.png").home_icon 
+					div.large-8.columns
+						h4(style="color: #FFFFFF;") App Analytics
+
+						p Measure the engagement and effectiveness of your app and increase revenue.
+
+						p 
+							a(href="modules/appanalytics") Learn more
+
+				div.row(style="height: 200px;")
+					div.large-4.columns
+						a(href="modules/gamification")
+							img(src="/img/icons/circle-gamification.png").home_icon
+					div.large-8.columns
+						h4(style="color: #FFFFFF;") Gamification and Social
+
+						p Effortlessly create real-time multiplayer learning games.
+
+						p 
+							a(href="modules/gamification") Learn more
+
+				div.row(style="height: 200px;")
+					div.large-4.columns
+						a(href="modules/learninganalytics")
+							img(src="/img/icons/circle-learninganalytics.png").home_icon
+					div.large-8.columns
+						h4(style="color: #FFFFFF;") Learning Analytics
+
+						p Provide feedback to learners and teachers on strengths and weaknesses.
+
+						p 
+							a(href="modules/learninganalytics") Learn more
+
+				
+
+			div.large-6.columns
+				div.row(style="height: 200px;")
+					div.large-4.columns
+						a(href="modules/adaptivealgorithms")
+							img(src="/img/icons/circle-adaptivealgorithms.png").home_icon
+					div.large-8.columns
+						h4(style="color: #FFFFFF;") Adaptive Algorithms
+
+						p.main_cleanformatting Deliver personalised learning with three state-of-the-art algorithms.
+
+						p 
+							a(href="modules/adaptivealgorithms") Learn more				
+
+
+				div.row(style="height: 200px;")
+					div.large-4.columns
+						a(href="modules/classroom")
+							img(src="/img/icons/circle-classroom.png").home_icon
+					div.large-8.columns
+						h4(style="color: #FFFFFF;") Classroom Ready
+
+						p Provide teachers with a dashboard to view student progress with your app.
+
+						p 
+							a(href="modules/classroom") Learn more
+
+				div.row(style="height: 200px;")
+					div.large-4.columns
+						a(href="modules/contentmodule")
+							img(src="/img/icons/circle-contentmodule.png").home_icon
+					div.large-8.columns
+						h4(style="color: #FFFFFF;") Content Module
+
+						p Manage and version your content then easily distribute updates to devices.
+
+
+						p 
+							a(href="modules/contentmodule") Learn more
+
+		p &nbsp;
+
+	div.small-10.large-centered.columns
+		hr
+
+	div.row
+		div.small-6.large-centered.columns
+			form(name="input" action="/register" method="post")
+				div.small-8.columns
+					input(type="text" name="email" placeholder="email")
+				div.small-4.columns
+					button.button(type="submit" value="signup") Sign up!

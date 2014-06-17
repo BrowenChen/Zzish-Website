@@ -1,0 +1,31 @@
+extends admin_layout
+
+block content
+	div.row
+
+	center
+		h1 Edit Users
+
+	hr
+
+	table
+		thead
+			tr
+				th(width="400") Username
+				th(width="400") email
+				th(width="100") 
+				th(width="100")
+				th(width="100")
+		tbody
+			tr
+				td Daryl Rodrigo
+				td darylrodrigo@gmail.com
+				td 
+					a(href="/admin/123/view").button.small View
+				td 
+					a(href="/admin/123/delete").button.small Delete
+				td 
+					a(href="/admin/123/disable").button.small disable
+
+
+	script.

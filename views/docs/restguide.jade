@@ -1,0 +1,50 @@
+extends docs_layout
+
+block content
+	div.row
+		hr
+
+		h1(align="center") #{platform}-#{type}
+
+		
+
+		div.row
+
+			hr
+
+			p <a href="/api_docs" style="color: #000000;"> #{platform} </a> > <a href="/api_docs/#{platform_path}" style="color: #000000;"> #{type} </a>
+
+			div.small-8.large-centered.columns.api_docs
+				<h3>Installing the library - Eclipse</h3>
+
+				<hr>
+
+				<h6>Step 1 - Register with Zzish e-mbassador to get an application Id</h6>
+				<p>Here's the link <a href="http://platform.zzish.com/register">http://platform.zzish.com/register</a> 
+
+				<hr>
+
+				<h6>Step 2 - That's it!</h6>
+				<p>You're Done</a> 
+
+				<hr>
+				
+				<h3>Making your first call</h3>
+				<p>All calls are made to our API using JSON as the request (e.g. not a parameter). A simple google search will result code for this in many languages. The response is also in JSON format.</p>
+				<p>On each device (e.g. browser, phone, tablet) you will need to have a deviceId. If you do not, please use the <a href="/api_docs/rest/api#devices">devices</a> method to get one. You can then create users using the deviceId and the  <a href="/api_docs/rest/api#users">users</a> method. 
+				<h3>Starting a User Session</h3>
+				<p>A session represents a set of interactions by one user. A simple example is a browser session. You can instantiate a session using <a href="/api_docs/rest/api#sessions">sessions</a>. This returns an id which you can use for its complementary method <a href="/api_docs/rest/api#sessionsstop">sessions/{id}/stop</a> to end the session when you're finished).
+				<h3>Measuring Activities</h3>
+				<p>With a session id, you can then log actions and activities. Activities represent a time-based event with a start and end time. You can also pause/resume the activity. A perfect example of an activity is a Game. When the user chooses to start a type of game, you simply call <a href="/api_docs/rest/api#activities">activities</a> passing in a unique name describing the type of activity (e.g "SinglePlay Level 5"and the session_id. The method will return an id that can be used in the lifecycle of the activity: (e.g. <a href="/api_docs/rest/api#activitiespause">activities/{id}pause</a>, <a href="/api_docs/rest/api#activitiesresume">activities/{id}/resume</a> and <a href="/api_docs/rest/api#activitiesstop">activities/{id}/stop</a>).
+				<h3>Logging Actions</h3>
+				<p>Actions represent events that are executed during an activity. Examples include answering a question, viewing a video, clicking on a button. Similar to an activity you can specify a unique name to identify the action. Actions can be recorded using the <a href="/api_docs/rest/api#actions">activities/{id}/actions</a> call.
+				<h3>Managing Users</h3>
+				<p>In order to support multiple users, the API provides an <a href="/api_docs/rest/api#users">users</a> method which simply returns an id representing that user uniquely. This can be used to start multiple sessions for each user.
+				<h3>Managing User Attributes</h3>
+				<p>In order to add user attributes to a profile, the API provides an <a href="/api_docs/rest/api#usersid">users/{id}</a> method. Attributes can also be added during creation when calling the  <a href="/api_docs/rest/api#users">users</a> method.
+				<h3>Exiting the App</h3>
+				<p>When exiting app, be sure to call the <a href="/api_docs/rest/api#finish">finish</a> service. This will close any user sessions.</p>
+
+
+		p &nbsp;
+

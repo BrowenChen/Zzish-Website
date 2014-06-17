@@ -1,0 +1,384 @@
+
+
+{
+	"apiVersion": "0.0.1",
+	"swaggerVersion": "1.2",
+	"basePath": "http://10.2.199.57:8081/platform-api/api/",
+	"resourcePath": "/activities",
+	"produces": [
+		"application/json"
+		],
+	"consumes": [
+            "application/json"
+        ],	
+	"apis":[
+		{
+			"path": "activities",
+			"operations": [
+				{
+					"method": "POST",
+					"summary": "Starts a new Activity",
+					"nickname": "registerDevice",
+					"parameters": [
+						{
+							"name": "appId",
+							"description": "Zzish e-mbass-sador application id",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+						{
+							"name": "sessionID",
+							"description": "The id returned from sessions response",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},						
+
+						{
+							"name": "name",
+							"description": "A string to represent the activity",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+
+						{
+							"name": "created",
+							"description": "The time the activity was created in Long Format",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						}
+
+
+					],
+					"errorResponses": [
+						{
+							"code":101,
+							"reason":"Missing appId"
+						},
+
+						{
+							"code":102,
+							"reason": "Invalid appId"
+						},
+						{
+							"code":401,
+							"reason": "Missing sessionId"
+						},
+
+						{
+							"code":402,
+							"reason": "Invalid appId"
+						}						
+					]											
+				}
+
+
+
+			]
+		},
+
+		{
+			"path": "activities/{id}/pause",
+			"operations": [
+				{
+					"method": "POST",
+					"summary": "Pauses an Activity",
+					"nickname": "pauseActivity",
+					"parameters": [
+						{
+							"name": "id (URL)",
+							"description": "The Activity ID returned from activities response",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+						{
+							"name": "appId",
+							"description": "Zzish e-mbaas-sador application Id",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},						
+
+						{
+							"name": "activityId",
+							"description": "The activityId returned from activities response",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+
+						{
+							"name": "created",
+							"description": "The time the activity was created in Long Format",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						}
+
+
+					],
+					"errorResponses": [
+						{
+							"code":101,
+							"reason":"Missing appId"
+						},
+
+						{
+							"code":102,
+							"reason": "Invalid appId"
+						},
+						{
+							"code":501,
+							"reason": "Missing activityId"
+						},
+
+						{
+							"code":502,
+							"reason": "Invalid activityId"
+						}						
+					]			
+
+
+				}
+			]
+		},
+		{
+			"path": "activities/{id}/resume",
+			"operations": [
+				{
+					"method": "POST",
+					"summary": "Resumes an Activity",
+					"nickname": "resumeActivity",
+					"parameters": [
+						{
+							"name": "id (URL)",
+							"description": "The Activity ID returned from activities response",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+						{
+							"name": "appId",
+							"description": "Zzish e-mbaas-sador application Id",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},						
+
+						{
+							"name": "activityId",
+							"description": "The activityId returned from activities response",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+
+						{
+							"name": "resumed",
+							"description": "The time the activity was resumed in Long Format",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						}
+
+
+					],
+					"errorResponses": [
+						{
+							"code":101,
+							"reason":"Missing appId"
+						},
+
+						{
+							"code":102,
+							"reason": "Invalid appId"
+						},
+						{
+							"code":501,
+							"reason": "Missing activityID"
+						},
+
+						{
+							"code":502,
+							"reason": "Invalid activityID"
+						}						
+					]			
+
+				}
+			]
+		},
+		{
+			"path": "activities/{id}/stop",
+			"operations": [
+				{
+					"method": "POST",
+					"summary": "Stops an Activity",
+					"nickname": "stopActivity",
+					"parameters": [
+						{
+							"name": "id (URL)",
+							"description": "The Activity ID returned from activities response",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+						{
+							"name": "appId",
+							"description": "Zzish e-mbaas-sador application Id",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},						
+
+						{
+							"name": "activityId",
+							"description": "The activityId returned from activities response",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						}
+					],
+					"errorResponses": [
+						{
+							"code":101,
+							"reason":"Missing appId"
+						},
+
+						{
+							"code":102,
+							"reason": "Invalid appId"
+						},
+						{
+							"code":501,
+							"reason": "Missing activityId"
+						},
+
+						{
+							"code":502,
+							"reason": "Invalid activityID"
+						}						
+					]								
+				}
+			]
+		},
+		{
+			"path": "activities/{id}/actions",
+			"operations": [
+				{
+					"method": "POST",
+					"summary": "Log an action within an Activity",
+					"nickname": "logAction",
+					"parameters": [
+						{
+							"name": "id (URL)",
+							"description": "The Activity ID returned from activities response",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+						{
+							"name": "appId",
+							"description": "Zzish e-mbaas-sador application Id",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},						
+						{
+							"name": "name",
+							"description": "Name of Action",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},						
+
+						{
+							"name": "activityId",
+							"description": "The activityId returned from activities response",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+						{
+							"name": "created",
+							"description": "The time the action was started in Long Format",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+						{
+							"name": "finished",
+							"description": "The time the action was finished in Lng Format",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},					
+						{
+							"name": "score",
+							"description": "The score for the action in float format",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},				
+						{
+							"name": "duration",
+							"description": "The duration for the action in long format",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},					
+						{
+							"name": "correct",
+							"description": "Whether the action was performed correctly or not in Boolean format",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},					
+						{
+							"name": "attributes",
+							"description": "An array of up to 5 attributes with name and value",
+							"required": true,
+							"type": "Array",
+							"paramType": "body"
+						}									
+					],
+					"errorResponses": [
+						{
+							"code":101,
+							"reason":"Missing appId"
+						},
+
+						{
+							"code":102,
+							"reason": "Invalid appId"
+						},
+						{
+							"code":501,
+							"reason": "Missing activityId"
+						},
+
+						{
+							"code":502,
+							"reason": "Invalid activityID"
+						}						
+					]					
+				}
+			]
+		}				
+	],
+	"models": {
+		"Activity": {
+			"id": "activity",
+			"properties": {
+				"id": {
+					"type": "string"
+					}
+				}
+		}
+	}
+}
+
+

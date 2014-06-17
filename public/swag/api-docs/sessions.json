@@ -1,0 +1,152 @@
+{
+	"apiVersion": "0.0.1",
+	"swaggerVersion": "1.2",
+	"basePath": "http://dev.zzish.com/api/",
+	"resourcePath": "/sessions",
+	"produces": [
+		"application/json"
+		],
+	"apis":[
+		{
+			"path": "sessions",
+			"operations": [
+				{
+					"method": "POST",
+					"summary": "Registers a new session",
+					"nickname": "registerSession",
+					"parameters": [
+						{
+							"name": "app_id",
+							"description": "Zzish e-mbass-sador application id",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+
+						{
+							"name": "userid",
+							"description": "userId from the users response",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},						
+
+						{
+							"name": "deviceId",
+							"description": "The device on which a session is being started",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+
+						{
+							"name": "created",
+							"description": "TThe time the device was created in Long Format",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						}
+					],
+					"errorResponses": [
+						{
+							"code":101,
+							"reason":"Missing appId"
+						},
+
+						{
+							"code":102,
+							"reason": "Invalid appId"
+						},
+						{
+							"code":201,
+							"reason": "Missing deviceID"
+						},
+
+						{
+							"code":202,
+							"reason": "Invalid deviceID"
+						},
+						{
+							"code":301,
+							"reason": "Missing userID"
+						},
+
+						{
+							"code":302,
+							"reason": "Invalid userID"
+						}														
+					]						
+				}
+			]
+		},
+
+		{
+			"path": "sessions/{id}/stop",
+			"operations": [
+				{
+					"method": "POST",
+					"summary": "Stops an existing session",
+					"nickname": "stopSession",
+					"parameters": [
+						{
+							"name": "app_id",
+							"description": "Zzish e-mbass-sador application id",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+
+						{
+							"name": "id (URL)",
+							"description": "sessionId returned from Sessions response",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},						
+						{
+							"name": "finished",
+							"description": "The time the session closed in Long Format",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						}
+					],
+
+					"errorResponses": [
+						{
+							"code":101,
+							"reason":"Missing appId"
+						},
+
+						{
+							"code":102,
+							"reason": "Invalid appId"
+						},
+						{
+							"code":401,
+							"reason": "Missing sessionID"
+						},
+
+						{
+							"code":402,
+							"reason": "Invalid sessionID"
+						}						
+					]							
+
+				}
+			]
+		}		
+	],
+	"models": {
+		"Device": {
+			"id": "device",
+			"properties": {
+				"id": {
+					"type": "string"
+					}
+				}
+		}
+	}
+}
+
+

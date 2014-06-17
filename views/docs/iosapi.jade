@@ -1,0 +1,328 @@
+extends docs_layout
+
+block content
+	div.row
+		hr
+
+		h1(align="center") #{platform}-#{type}
+
+		
+
+		div.row
+
+			hr
+
+			p <a href="/api_docs" style="color: #000000;"> #{platform} </a> > <a href="/api_docs/#{platform_path}" style="color: #000000;"> #{type} </a>
+
+			div.small-8.large-centered.columns.api_docs
+				<h3 id="AnalyticsService">AnalyticsService</h3>
+
+				<p>To instantiate this object, use the static AnalyticsService.initWithApplicationId method.</p>
+				<h6>Constructor</h6>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Name</th><th>Description</th>
+				<tr><td><a href="#init">+(id) initWithApplicationId:(NSString*)app_id</a></td><td>Initialise service with e-mbaas-ador app_id and return PlatformSDK object</td></tr>
+				</table>
+				<h6>Methods</h6>
+				<table class="table table-bordered doctable">
+				<tr><th>Method</th><th>Description</th>
+				<tr><td><a href="#startActivity">- (long) startActivity:(NSString*) name forUser:(NSString*)userId</a></td><td>Start a measured activity for a user.</td></tr>
+				<tr><td><a href="#pauseActivity">- (void) pauseActivity:(long) activityId</a></td><td>Pause a measured activity</td></tr>
+				<tr><td><a href="#resumeActivity">- (void) resumeActivity:(long) activityId</a></td><td>Resume a measured activity</td></tr>
+				<tr><td><a href="#stopActivity">- (void) stopActivity:(long)activityId</a></td><td>Stop a measured activity using id provided from startActivity method</td></tr>
+				<tr><td><a href="#logAction">- (LoggedAction *) logAction:(NSString *)name forActivity:(long) activityId</a></td><td>Log an action occurring during activity</td></tr>
+				<tr><td><a href="#updateAction">- (void) updateAction:(LoggedAction *) action</a></td><td>Updates an existing action</td></tr>
+				<tr><td><a href="#getUser">- (User *) getUser:(NSString*) userId</a></td><td>Retrieve the current User object</td></tr>
+				<tr><td><a href="#updateUser">- (void) updateUser:(User *)user</a></td><td>Save the Current User</td></tr>
+				<tr><td><a href="#startSession">- (void) startSession:(NSString*) userId</a></td><td>Manually start a session for the specified User Id</td></tr>
+				<tr><td><a href="#stopSession">- (void) stopSession:(NSString*) userId</a></td><td>Manually stop a session for the specified User Id</td></tr>
+				<tr><td><a href="#finish">- (void) finish</a></td><td>Called when app exits to do any cleanup</td></tr>
+				</table>
+
+				<h6 id="init">initWithApplicationId</h6>
+
+				<p>Initialise the Analytics service. This method must be called before any other methods. If it has not be completed, does not complete correctly, all subsequent methods will be ignored.</p>
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>app_id</td><td>String</td><td>The e-mbaas-ador app_id provided from Zzish dashboard</td></tr>
+				</table>
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>service</td><td>AnalyticsServices</td><td>The AnalyticsService object to call all methods</td></tr>
+				</table>	
+
+				<h6 id="startActivity">startActivity forUser</h6>
+
+				<p>Start tracking a measured activity that has a duration of existence (e.g. playing a game). It has an accompanying method (endActivity) to end the activity.</p>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>name</td><td>String</td><td>A unique name representing this type of activity</td></tr>
+				<tr><td>userId</td><td>String</td><td>A developer generated userId. Should be unique for each user in the app</td></tr>
+				</table>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>id</td><td>long</td><td>A unique id representing this activity. Can be used in <a href="#logAction">logAction</a> and activity lifecycle methods (e.g. <a href="#stopActivity">stopActivity</a>)</td></tr>
+				</table>
+
+				<h6 id="pauseActivity">pauseActivity</h6>
+
+				<p>Pause an existing activity. If the activity is already paused, nothing will happen</p>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>id</td><td>long</td><td>The id returned by the <a href="#startActivity">startActivity</a> method</td></tr>
+				</table>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td colspan="3">N/A</td></tr>
+				</table>	
+
+				<h6 id="resumeActivity">resumeActivity</h6>
+
+				<p>Resume an existing activity. If the activity is already resumed, nothing will happen</p>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>id</td><td>long</td><td>The id returned by the <a href="#startActivity">startActivity</a> method</td></tr>
+				</table>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td colspan="3">N/A</td></tr>
+				</table>	
+
+				<h6 id="stopActivity">stopActivity</h6>
+
+				<p>Complementary method for startActivity. This can be called to notify the server that the activity has been finished. No futher actions can be logged against this activity.</p>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>id</td><td>long</td><td>The id returned by the <a href="#startActivity">startActivity</a> method</td></tr>
+				</table>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td colspan="3">N/A</td></tr>
+				</table>	
+
+				<h6 id="logAction">logAction forActivity</h6>
+
+				<p>Log actions that occur during an activity. If the activity is paused/stop or does not exist, the method will return null.</p>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>activity_id</td><td>long</td><td>The id returned by the startActivity method</td></tr>
+				<tr><td>name</td><td>String</td><td>A unique name representing this type of action (e.g. "Question 7x7")</td></tr>
+				</table>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>loggedAction</td><td><a href="#LoggedAction">LoggedAction</a></td><td>An object representing the action where additional attributes/properties can be set</td></tr>
+				</table>
+
+				<h6 id="updateAction">updateAction</h6>
+
+				<p>Updates an existing action from LoggedAction method. This method can only be called once. Any subsequent calls will be ignored.</p>
+
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>loggedAction</td><td><a href="#LoggedAction">LoggedAction</a></td><td>The object created from <a href="#logAction">logAction</a> method</td></tr>
+				</table>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td colspan="3">N/A</td></tr>
+				</table>
+
+
+				<h6 id="getUser">getUser</h6>
+
+				<p>Retrieve the current user that all actions/activities are being tracked against</p>
+
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>userId</td><td>String</td><td>A unique String representing a User. If the SDK does not contain any information about this userId, it will return a new object. If it does, it will return the object prepopulated with the previous data.</td></tr>
+				</table>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>user</td><td><a href="#User">User</a></td><td>The user object encapsulating various attributes and custom attributes</td></tr>
+				</table>
+
+				<h6 id="updateUser">updateUser</h6>
+
+				<p>Retrieve the current user that all actions/activities are being tracked against</p>
+
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>user</td><td><a href="#User">User</a></td><td>An existing user object retrieved the <a href="#getUser">getUser</a> method.</td></tr>
+				</table>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td colspan="3">N/A</td></tr>
+				</table>	
+
+				<h6 id="startSession">startSession</h6>
+
+				<p>Manually start a session for the specified userId. It will not create a new session if an active one already exists.</p>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>userId</td><td>String</td><td>A unique String representing a User. </td></tr>
+				</table>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td colspan="3">N/A</td></tr>
+				</table>	
+
+				<h6 id="stopSession">stopSession</h6>
+
+				<p>Manually stop a session for the specified userId</p>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>userId</td><td>String</td><td>A unique String representing a User..</td></tr>
+				</table>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td colspan="3">N/A</td></tr>
+				</table>	
+
+				<h6 id="finish">finish</h6>
+
+				<p>Called when app exits to clean</p>
+
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td colspan="3">N/A</td></tr>
+				</table>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td colspan="3">N/A</td></tr>
+				</table>	
+
+				<h4 id="User">User class</h4>
+
+				<p>All properties can be accessed using getXXXX and setXXXX methods (e.g setDob and getDob)</p>
+
+				<p>You can save up to 5 custom attributes using the <a href="#userSetAttribute">setValue forKey</a> method</p>
+
+				<h3>Properties</h3>
+
+
+				<table class="table table-bordered doctable">
+				<tr><th>Property</th><th>Type</th><th>Description</th></tr>
+				<tr><td>dob</td><td>long</td><td>Date of birth of person</td></tr>
+				<tr><td>gender</td><td>integer</td><td>0 - Unspecified (Can also use User.UNSPECIFIED)<br/>
+				1 - Male (Can also use User.MALE)<br/>
+				2 - Female (Can also use User.FEMALE)</td></tr>
+				<tr><td>latitude</td><td>float</td><td>Latitude of Location of User</td></tr>
+				<tr><td>longitude</td><td>float</td><td>Longitude of Location of User</td></tr>
+				<tr><td>userId</td><td>String</td><td>Custom User ID field for developer's use. It is the developer's responsibility to ensure that this field is unique</td></tr>
+				</table>
+
+				<h3>Methods</h3>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Method</th><th>Description</th></tr>	
+				<tr><td>void setAttribute(String key, Object value)</td><td>Set a value against a particular key (e.g. shirtcolour=>yellow)</td></tr>
+				</table>
+
+				<h6 id="userSetAttribute">setValue forKey</h6>
+
+				<p>Set a value against a particular key. This method can save a maximum of 5 attributes.</p>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>key</td><td>String<td>The key of the Attribute</td></tr>
+				<tr><td>value</td><td>Object<td>The value of the object. Although it can be an object, it will be converted to a String, so only use primitive data types (via their object wrappers) or a String</td></tr>
+				</table>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td colspan="3">N/A</td></tr>
+				</table>	
+
+				<h6 id="userRemoveAttribute">removeAttribute</h6>
+
+				<p>Remove an existing attribute</p>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>key</td><td>String<td>The key of the Attribute</td></tr>
+				</table>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td colspan="3">N/A</td></tr>
+				</table>
+
+				<h3 id="LoggedAction">LoggedAction class</h3>
+
+				<p>All properties can be accessed using normally (e.g. action.score).</p>
+
+				<p>You can save up to 5 custom attributes using the <a href="#loggedActionSetAttribute">setValue forKey</a> method</p>
+
+				<h3>Properties</h3>
+
+
+				<table class="table table-bordered doctable">
+				<tr><th>Property</th><th>Type</th><th>Description</th></tr>
+				<tr><td>id</td><td>long</td><td>The unique Id of the Action. Should not be changed. </td></tr>
+				<tr><td>score (optional)</td><td>float</td><td>A score for the action</td></tr>
+				<tr><td>duration (optional)</td><td>long</td><td>A Duration for the action</td></tr>
+				<tr><td>correct (optional)</td><td>Boolean</td><td>Whether the action was correct or not</td></tr>
+				</table>
+
+				<h3>Methods</h3>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Method</th><th>Description</th></tr>	
+				<tr><td>- (void) setValue:(id)value forKey:(NSString *)key</td><td>Set a value against a particular key (e.g. shirtcolour=>yellow)</td></tr>
+				</table>
+
+				<h6 id="loggedActionSetAttribute">setValue forKey</h6>
+
+				<p>Set a value against a particular key. This method can save a maximum of 5 attributes.</p>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>value</td><td>Object<td>The value of the object. Although it can be an object, it will be converted to a String, so only use primitive data types (via their object wrappers) or a String</td></tr>
+				<tr><td>key</td><td>String<td>The key of the Attribute</td></tr>
+				</table>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td colspan="3">N/A</td></tr>
+				</table>	
+
+				<h6 id="loggedActionRemoveAttribute">removeAttribute</h6>
+
+				<p>Remove an existing attribute</p>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td>key</td><td>String<td>The key of the Attribute</td></tr>
+				</table>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Type</th><th>Description</th></tr>
+				<tr><td colspan="3">N/A</td></tr>
+				</table>
+
+
+
+		p &nbsp;
+

@@ -1,0 +1,332 @@
+extends main_layout
+
+block content
+	div.row
+		div.large-3.columns
+			p 
+
+		div.large-6.columns
+			form(align="center" name="input" action="/register_submit" method="post")#msform
+
+				h1(align="center" style="color: #FFFFFF; font-family: 'Lato', sans-serif;") Register
+
+				hr
+
+				ul#progressbar
+					li.active Account Setup
+					li Preferences
+					li Qualifying Questions
+
+				fieldset
+					h2.fs-title Create your account
+
+					input(name="email" type="text" value="#{email}" placeholder="Email").inputtext
+
+					input(name="name" type="text" placeholder="Full Name").inputtext
+
+					input(name="tel" type="text" placeholder="Telephone (optional)").inputtext
+
+					input(name="password" type="password" placeholder="Password").inputtext
+
+					input(type="button" name="next" value="next").next.inputtext.action-button
+
+				fieldset
+					h3.fs-title Which three modules are you most interested in?
+
+					div.large-4.columns
+						img(src="/img/icons/circle-adaptivealgorithms.png" width=75 height=75)#radioimg_1
+						input(type="checkbox" name="adaptivealgorithms" value="true")#radio_1
+						<br>
+
+						img(src="/img/icons/circle-appanalytics.png" width=75 height=75)#radioimg_2
+						input(type="checkbox" name="appanalytics" value="true")#radio_2
+						<br>
+
+					div.large-4.columns
+						img(src="/img/icons/circle-classroom.png" width=75 height=75)#radioimg_3
+						input(type="checkbox" name="classroom" value="true")#radio_3
+						<br>
+
+					
+						img(src="/img/icons/circle-contentmodule.png" width=75 height=75)#radioimg_4
+						input(type="checkbox" name="contentmodule" value="true")#radio_4
+						<br>
+
+					div.large-4.columns
+						img(src="/img/icons/circle-gamification.png" width=75 height=75)#radioimg_5
+						input(type="checkbox" name="gamification" value="true")#radio_5
+						<br>
+
+						img(src="/img/icons/circle-learninganalytics.png" width=75 height=75)#radioimg_6
+						input(type="checkbox" name="learninganalytics" value="true")#radio_6
+						<br>
+
+					input(type="button" name="previous" value="previous").previous.action-button.inputtext
+					input(type="button" name="next" value="next").next.action-button.inputtext
+
+
+				fieldset
+					h2.fs-title Qualifying Questions
+
+					select(name="business")#input_audience
+						option(value="-") Select Business type
+						option(value="educationInstitution") Education Institution
+						option(value="digitalAgency") Digital Agency
+						option(value="appDev") App Developer
+						option(value="other") Other
+
+					select(name="appinstalls")
+						option(value="-") Select App installs
+						option(value="notLaunched") Not launched
+						option(value="0_1000") 0 - 1,000
+						option(value="1000_10000") 1,000 - 10,000
+						option(value="10000plus") > 10,000
+
+					select(name="nopeople")
+						option(value="-") Select #Employees
+						option(value="5_10") 5 - 10
+						option(value="11_50") 11 - 50 
+						option(value="51_100") 51 - 100
+						option(value="100plus") > 101
+
+					button(type="submit" value="signup").action-button.submitbutton Submit
+
+		div.large-3.columns(style="background-color:#BBBBBB; border-radius: 20px 20px 20px 20px; margin-top: 150px; margin-left: 10px; width:200px; height:350px; display:none;")#infobox
+			h4(align="center" style="color: #FFFFFF; font-family: 'Lato', sans-serif;")#infotitle Gamification
+
+			hr
+			center
+				img(src="/img/icons/circle-gamification.png" width=75 height=75)#infoimage
+
+			hr
+ 
+			p(align="center" style="color: #FFFFFF; font-family: 'Lato', sans-serif;")#infotext
+
+
+
+
+	script.
+		//button animation
+		var radio_1_state = false;
+		var radio_2_state = false;
+		var radio_3_state = false;
+		var radio_4_state = false;
+		var radio_5_state = false;
+		var radio_6_state = false;
+
+		//RADIO1
+		$('#radioimg_1').click(function () {  
+			if(radio_1_state){
+				$('#radio_1').attr('checked', false);
+				radio_1_state = false;
+			}
+			else
+			{
+				$('#radio_1').attr('checked', true);
+				radio_1_state = true;
+			}
+		});
+		$('#radioimg_1').mouseenter(function(){
+			$('#infotitle').text("Adaptive Algorithms");
+			$('#infotext').text("Deliver personalised learning with three state-of-the-art algorithms.");
+			$('#infoimage').attr('src', '/img/icons/circle-adaptivealgorithms.png');
+			$('#infobox').fadeIn("fast");
+			
+		});
+		$('#radioimg_1').mouseleave(function(){
+			$('#infobox').fadeOut("fast");
+		});
+
+		//RADIO2
+		$('#radioimg_2').click(function () {  
+			if(radio_2_state){
+				$('#radio_2').attr('checked', false);
+				radio_2_state = false;
+			}
+			else
+			{
+				$('#radio_2').attr('checked', true);
+				radio_2_state = true;
+			}
+		});
+		$('#radioimg_2').mouseenter(function(){
+			$('#infotitle').text("App Analytics");
+			$('#infotext').text("Measure the engagement and effectiveness of your app and increase revenue.");
+			$('#infoimage').attr('src', '/img/icons/circle-appananalytics.png');
+			$('#infobox').fadeIn("fast");
+			
+		});
+		$('#radioimg_2').mouseleave(function(){
+			$('#infobox').fadeOut("fast");
+		});
+
+		//RADIO 3
+		$('#radioimg_3').click(function () {  
+			if(radio_3_state){
+				$('#radio_3').attr('checked', false);
+				radio_3_state = false;
+			}
+			else
+			{
+				$('#radio_3').attr('checked', true);
+				radio_3_state = true;
+			}
+		});
+		$('#radioimg_3').mouseenter(function(){
+			$('#infotitle').text("Classroom Ready");
+			$('#infotext').text("Provide teachers with a dashboard to view student progress with your app.");
+			$('#infoimage').attr('src', '/img/icons/circle-classroom.png');
+			$('#infobox').fadeIn("fast");
+			
+		});
+		$('#radioimg_3').mouseleave(function(){
+			$('#infobox').fadeOut("fast");
+		});
+
+		//RADIO 4
+		$('#radioimg_4').click(function () {  
+			if(radio_4_state){
+				$('#radio_4').attr('checked', false);
+				radio_4_state = false;
+			}
+			else
+			{
+				$('#radio_4').attr('checked', true);
+				radio_4_state = true;
+			}
+		});
+		$('#radioimg_4').mouseenter(function(){
+			$('#infotitle').text("Content Module");
+			$('#infotext').text("Manage and version your content then easily distribute updates to devices.");
+			$('#infoimage').attr('src', '/img/icons/circle-contentmodule.png');
+			$('#infobox').fadeIn("fast");
+			
+		});
+		$('#radioimg_4').mouseleave(function(){
+			$('#infobox').fadeOut("fast");
+		});
+
+		//RADIO 5
+		$('#radioimg_5').click(function () {  
+			if(radio_5_state){
+				$('#radio_5').attr('checked', false);
+				radio_5_state = false;
+			}
+			else
+			{
+				$('#radio_5').attr('checked', true);
+				radio_5_state = true;
+			}
+		});
+		$('#radioimg_5').mouseenter(function(){
+			$('#infotitle').text("Gamification");
+			$('#infotext').text("Effortlessly create real-time multiplayer learning games.");
+			$('#infoimage').attr('src', '/img/icons/circle-learninganalytics.png');
+			$('#infobox').fadeIn("fast");
+			
+		});
+		$('#radioimg_5').mouseleave(function(){
+			$('#infobox').fadeOut("fast");
+		});
+
+		//RADIO 6
+		$('#radioimg_6').click(function () {  
+			if(radio_6_state){
+				$('#radio_6').attr('checked', false);
+				radio_6_state = false;
+			}
+			else
+			{
+				$('#radio_6').attr('checked', true);
+				radio_6_state = true;
+			}
+		});
+		$('#radioimg_6').mouseenter(function(){
+			$('#infotitle').text("Adaptive Algorithms");
+			$('#infotext').text("Deliver personalised learning with three state-of-the-art algorithms.");
+			$('#infoimage').attr('src', '/img/icons/circle-adaptivealgorithms.png');
+			$('#infobox').fadeIn("fast");
+			
+		});
+		$('#radioimg_6').mouseleave(function(){
+			$('#infobox').fadeOut("fast");
+		});
+
+		//jQuery time Form Animation
+		var current_fs, next_fs, previous_fs; //fieldsets
+		var left, opacity, scale; //fieldset properties which we will animate
+		var animating; //flag to prevent quick multi-click glitches
+
+		$(".next").click(function(){
+			if(animating) return false;
+			animating = true;
+			
+			current_fs = $(this).parent();
+			next_fs = $(this).parent().next();
+			
+			//activate next step on progressbar using the index of next_fs
+			$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+			
+			//show the next fieldset
+			next_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+				step: function(now, mx) {
+					//as the opacity of current_fs reduces to 0 - stored in "now"
+					//1. scale current_fs down to 80%
+					scale = 1 - (1 - now) * 0.2;
+					//2. bring next_fs from the right(50%)
+					left = (now * 50)+"%";
+					//3. increase opacity of next_fs to 1 as it moves in
+					opacity = 1 - now;
+					current_fs.css({'transform': 'scale('+scale+')'});
+					next_fs.css({'left': left, 'opacity': opacity});
+				}, 
+				duration: 800, 
+				complete: function(){
+					current_fs.hide();
+					animating = false;
+				}, 
+				//this comes from the custom easing plugin
+				easing: 'easeInOutBack'
+			});
+		});
+
+		$(".previous").click(function(){
+			if(animating) return false;
+			animating = true;
+			
+			current_fs = $(this).parent();
+			previous_fs = $(this).parent().prev();
+			
+			//de-activate current step on progressbar
+			$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+			
+			//show the previous fieldset
+			previous_fs.show(); 
+			//hide the current fieldset with style
+			current_fs.animate({opacity: 0}, {
+				step: function(now, mx) {
+					//as the opacity of current_fs reduces to 0 - stored in "now"
+					//1. scale previous_fs from 80% to 100%
+					scale = 0.8 + (1 - now) * 0.2;
+					//2. take current_fs to the right(50%) - from 0%
+					left = ((1-now) * 50)+"%";
+					//3. increase opacity of previous_fs to 1 as it moves in
+					opacity = 1 - now;
+					current_fs.css({'left': left});
+					previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+				}, 
+				duration: 800, 
+				complete: function(){
+					current_fs.hide();
+					animating = false;
+				}, 
+				//this comes from the custom easing plugin
+				easing: 'easeInOutBack'
+			});
+		});
+
+		$(".submit").click(function(){
+			return false;
+		})

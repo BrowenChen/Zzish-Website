@@ -1,0 +1,112 @@
+/**
+ * Parallax Scrolling Tutorial
+ * For NetTuts+
+ *  
+ * Author: Mohiuddin Parekh
+ *	http://www.mohi.me
+ * 	@mohiuddinparekh   
+ */
+
+
+
+
+#home { 
+	background: url(/img/bg/learn2.png) 100% 0 no-repeat fixed; 
+    background-size: 100%;
+	height: 60%;  
+	margin: 0 auto; 
+    width: 100%;
+    max-width: 1920px; 
+    position: relative; 
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}
+
+#home_2 { 
+    background: url(/img/bg/learn2.png) 100% 0 no-repeat fixed; 
+    background-size: 100%;
+    height: 30%;  
+    margin: 0 auto; 
+    width: 100%;
+    max-width: 1920px; 
+    position: relative; 
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}
+
+#signup { 
+	background: url(/img/bg/learn1.jpg) 50% 0 no-repeat fixed; 
+	height: 100%;  
+    background-size: 100%;
+	margin: 0 auto; 
+    width: 100%; 
+    max-width: 1920px; 
+    position: relative; 
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}
+
+.home_icon {
+    margin-top: 30px;
+}
+
+.main_formatting p, h1, h2, h3, h4, li ,ol {
+    color: #FFFFFF; 
+}
+
+.main_formatting li {
+    color: #74B4FE; 
+    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+}
+
+.main_cleanformatting p, h1, h2, h3, h4, li, ol, a {
+    color: #FFFFFF; 
+    font-family: 'Lato', sans-serif;
+}
+
+.main_cleanformatting_invert h1, h2, h3, h4 {
+    color: #000000; 
+    font-family: 'Lato', sans-serif;
+}
+
+.main_cleanformatting_invert a, p, li, ol {
+    color: #000000; 
+    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+}
+    
+
+.colour_yellow * {
+    color: #003300; 
+}
+
+.container {
+    background-color:#8C298F;
+    border-radius: 20px 20px 20px 20px;
+    margin: 20px;
+    padding: 20px;
+}
+
+.container_invert {
+    background-color:#FFFFFF;
+    border-radius: 20px 20px 20px 20px;
+    margin: 20px;
+    padding: 20px;
+}
+
+.footer_format a {
+    color: #000000; 
+    font-family: 'Lato', sans-serif;
+}
+
+.api_docs a {
+    color: #0084FD; 
+    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+}
+
+.api_docs a:hover {
+    color: #004F9E; 
+    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+}
+
+.code p {
+    font-size:12px;
+    color: #000000; 
+    font-family:"Courier",Times,serif;
+}

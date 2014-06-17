@@ -1,0 +1,109 @@
+doctype html
+html
+	head
+		title= title
+
+		block css
+			link(rel='stylesheet', href='/css/foundation.css')
+			link(rel='stylesheet', href='/css/docs.css')
+			link(rel='stylesheet', href='/css/style.css')
+			link(href='http://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css')
+
+		block js
+			script(src="/js/vendor/modernizr.js")
+			script(src="/js/vendor/jquery.js")
+			script(src="/js/foundation.min.js")
+
+
+
+			script(src="http://thecodeplayer.com/uploads/js/jquery.easing.min.js")
+
+
+
+	body
+		nav.top-bar
+			ul.title-area
+				li.name
+					h1 
+						a(href="/#modulebase") Zzish
+
+			section.top-bar-section
+				ul.right.main_cleanformatting
+					li
+						a(href="/prices") Prices
+					li
+						a(href="/faq") FAQ
+
+					li
+						a(href="/api_docs") API & Docs
+
+					li
+						a(href="/modules") Modules
+
+					li
+						a(href="/login") Sign In
+
+					li
+						a(href="mailto:developers@zzish.com") Contact Us
+
+		
+
+		
+		section(data-speed="10" data-type="background").main_cleanformatting#home_2
+			div.row
+				div.large-8.columns
+					img(src="/img/zzish-logo.png" style="width: 300px; margin-bottom: 10px;")
+					h4(align="left" style="text-shadow:2px 2px 2px #000000; color: #FFFFFF; font-family: 'Lato', sans-serif; margin-top: -10px; font-size: 19px;") <b> Making Smarter. Learning Faster.</b> 
+
+				div.large-4.columns
+			
+					div.small-12.large-centered.columns(style="text-position: center; background-color:#000000; opacity:0.6; border-radius: 20px 20px 20px 20px; margin-top: 5%")
+						h4(align="center" style="color: #FFFFFF; font-family: 'Lato', sans-serif;") Sign Up
+						
+
+						form(name="input" action="/register" method="post")
+							input(type="text" name="email" placeholder="Your email address")
+							
+							
+							center
+								button.button.round.small(type="submit" value="signup") Sign Up
+		
+		block content
+
+
+		footer.row.footer_format
+			hr
+
+			div.row
+
+				div.large-6.columns
+					Zzish
+
+				div.large-6.columns
+					ul.inline-list.right
+						li
+							a(href="/privacypolicy") Privacy Policy
+						li
+							a(href="/aboutus") About Us
+						li
+							a(href="mailto:developers@zzish.com") Contact Us
+			
+
+		//- Required to load Foundation:
+		script.
+			$(document).foundation();
+
+		script.
+			var addthis_config = {"data_track_addressbar":true};
+			var addthis_config = {services_exclude: 'print'};
+
+		script.
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-2402555-20', 'zzish.com');
+			ga('send', 'pageview');
+
+		script(src="//s7.addthis.com/js/300/addthis_widget.js#pubid=edwiles")

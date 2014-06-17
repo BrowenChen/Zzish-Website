@@ -1,0 +1,30 @@
+{
+	"apiVersion": "0.0.1",
+	"swaggerVersion": "1.2",
+	"apis": [
+		{
+			"path": "/../sessions.json",
+			"description": "Session related operations"
+		},
+		{
+			"path": "/../activities.json",
+			"description": "activities related operations"
+		},
+		{
+			"path": "/../users.json",
+			"description": "User related operations"
+		},
+		{
+			"path": "/../finish.json",
+			"description": "User related operations"
+		},		
+
+		{
+			"path": "/../devices.json",
+			"description": "Device related operations"
+		}
+	],
+	"info": "Zzish swagger documentation",
+	"description": "Zzish provides APIs for learning apps. You can find out more about Zzish by visiting the <a href=\"www.zzish.com\">Zzish website</a>",
+	"contact": "developer@zzish.com"
+}

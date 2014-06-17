@@ -1,0 +1,30 @@
+extends layout
+
+block content
+
+	div.row
+		
+		hr
+
+		h1(align="center") #{teacher.name}'s Dashboard
+
+		hr
+
+		h2 Current Classrooms
+
+		hr
+
+		p &nbsp;
+
+		
+			for classroom in classrooms
+				div.small-10.large-centered.columns
+					div.row(style="background-color: #DDDDDD; padding: 20px;")
+						div.medium-10.columns
+							h4 Name: #{classroom.name} 
+							h4 Year: #{classroom.year}
+						div.medium-2.columns
+							a.button(href="/teachers/classroom/#{classroom._id}/" style="margin-top: 15px;") View
+				p &nbsp;
+				
+

@@ -1,0 +1,145 @@
+extends profile_layout
+
+block name
+	a(href="/profile/home" style="color: #FFFFFF; font-family: 'Lato', sans-serif;") Welcome back
+
+block content
+	div.row
+		hr
+		h1(align="center") Profile
+		hr
+		
+
+
+		div.medium-6.columns
+
+			h2(align="center") Basic
+
+				
+				
+			
+
+			div.row
+
+				hr
+				img(src="http://www.flaticon.com/png/256/128.png" height="20" width="20" onclick="edit_profile();" align="right")
+
+
+			form(name="input" action="/profile/update" method="post").styletext
+				div.row
+					div.medium-4.columns
+						h4 Name:
+
+
+					div.medium-8.columns
+						div
+							input(type="hidden" value="#{user.name}" name="name" placeholder="Full Name").inputtext#edit_name
+						div#display_name
+							h4 #{user.name}
+
+
+
+				div.row
+					div.medium-4.columns
+						h4 Phone#:
+
+					div.medium-8.columns
+						div
+							input(type="hidden" name="phone" value="#{user.tel}" placeholder="Phone Number").inputtext#edit_phone
+						div#display_phone
+							h4 #{user.tel}
+
+
+				div.row
+					div.medium-4.columns
+						h4 Email
+
+					div.medium-8.columns
+						div				
+							input(type="hidden" name="email" value="#{user.email}" placeholder="email").inputtext#edit_email
+						div#display_email
+							h4 #{user.email}
+
+				
+
+
+
+
+				hr
+
+
+				div.row
+					div.medium-4.columns
+						h4 Business:
+
+
+					div.medium-8.columns
+						div
+							input(type="hidden" value="App Dev" name="#{user.business}" placeholder="Business").inputtext#edit_business
+						div#display_business
+							h4 #{user.business}
+
+				div.small-4.large-centered.columns
+					button(type="submit" value="edit" style="visibility: hidden;").expand.round#update_button Update
+
+
+
+
+		div.medium-6.columns
+			h2(align="center") Billing
+
+			hr
+
+			div.row
+					div.medium-6.columns
+						h4 Outstanding Balance:
+
+
+					div.medium-2.columns
+						h4 £-
+
+					div.medium-4.columns
+						a.button.round.small.expand Pay now
+
+			div.row
+					div.medium-6.columns
+						h4 Current months fee:
+
+
+					div.medium-2.columns
+						h4 £-
+
+					div.medium-4.columns
+						a.button.round.small.expand View Details
+
+
+			p &nbsp;
+
+			h3(align="center") Previous months 
+
+			hr
+
+			div.medium-4.columns
+				h4 March				
+				h4 Febuary
+
+			div.medium-8.columns
+				h4  £ -
+				h4	£ -
+
+	script.
+		function edit_profile(){
+			$('#edit_name').attr("type", "text");
+			$('#edit_phone').attr("type", "text");
+			$('#edit_email').attr("type", "text");
+			$('#edit_company').attr("type", "text");
+			$('#edit_business').attr("type", "text");
+
+			$('#display_name').attr("style", "display: none;");
+			$('#display_phone').attr("style", "display: none;");
+			$('#display_email').attr("style", "display: none;");
+			$('#display_company').attr("style", "display: none;");
+			$('#display_business').attr("style", "display: none;");
+
+			document.getElementById('update_button').style.visibility='visible';
+		}

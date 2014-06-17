@@ -1,0 +1,541 @@
+extends docs_layout
+
+block content
+	div.row
+		hr
+
+		h1(align="center") #{platform}-#{type}
+
+		
+
+		div.row
+
+			hr
+
+			p <a href="/api_docs" style="color: #000000;"> #{platform} </a> > <a href="/api_docs/#{platform_path}" style="color: #000000;"> #{type} </a>
+
+			div.small-8.large-centered.columns.api_docs
+				<h6>Services</h6>
+				<table class="table table-bordered doctable">
+				<tr><th>Method</th><th>Description</th>
+				<tr><td><a href="#devices">devices</a></td><td>Register a device onto the system</td></tr>
+				<tr><td><a href="#sessions">sessions</a></td><td>Start a user session</td></tr>
+				<tr><td><a href="#sessionsstop">sessions/{id}/stop</a></td><td>Stop a user session</td></tr>
+				<tr><td><a href="#activities">activities</a></td><td>Start a measured activity for a user.</td></tr>
+				<tr><td><a href="#activitiespause">activities/{id}/pause</a></td><td>Pause a measured activity</td></tr>
+				<tr><td><a href="#activitiesresume">activities/{id}/resume</a></td><td>Resume a measured activity</td></tr>
+				<tr><td><a href="#activitiesstop">activities/{id}/stop</a></td><td>Stop a measured activity using id provided from activities service</td></tr>
+				<tr><td><a href="#actions">activities/{id}/actions</a></td><td>Log an action occurring during activity</td></tr>
+				<tr><td><a href="#users">users</a></td><td>Retrieve the current User object</td></tr>
+				<tr><td><a href="#usersid">users/{id}</a></td><td>Save the Current User</td></tr>
+				<tr><td><a href="#finish">finish</a></td><td>Called when App has exited unexpectedly to do any cleanup</td></tr>
+				</table>
+
+				<h6 id="devices">devices</h6>
+
+				<p>Register a Device on the system</p>
+
+				<pre>
+				&#123;
+				"appId" : "1234asdfa2342342asfd",
+				"name" : "Device 4",
+				"uuid": "123124sad234234",
+				"os": "Windows"
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th>th>Format (Required?)</th><th>Description</th></tr>
+				<tr><td>appId</td><td>String (Yes)</td><td>Zzish e-mbaas-sador application Id</td></tr>
+				<tr><td>name</td><td>String (No)</td><td>A name to represent the device.</td></tr>
+				<tr><td>uuid</td><td>String (No)</td><td>An optional field representing a unique id for that device. If used in the future, the same device will be returned.</td></tr>
+				<tr><td>os</td><td>String (No)</td><td>An optional field to determine the os of the device</td></tr>
+				</table>
+
+				<pre>
+				&#123;	
+				"status": 0,
+				"message": "",
+				"id": "123123sdafsdf23423423"
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Format</th><th>Description</th></tr>
+				<tr><td>status</td><td>Number</td><td>0 - OK, Non Zero - Error/Warning</td></tr>
+				<tr><td>message</td><td>String</td><td>A brief description of error. Empty if no error</td></tr>
+				<tr><td>id</td><td>String</td><td>A unique string representing the device. To be used in other services (e.g. <a href="#users">users</a>)</td></tr>
+				</table>	
+
+				<table class="table table-bordered doctable">
+				<tr><th>Error Code</th><th>Description</th></tr>
+				<tr><td>101</td><td>Missing appId</td></tr>
+				<tr><td>102</td><td>Invalid appId</td></tr>
+				</table>
+
+				<h6 id="sessions">sessions</h6>
+
+				<p>Start a user session</p>
+
+				<pre>
+				&#123;
+				"appId" : "1234asdfa2342342asfd",
+				"deviceId": "123123sdafsdf23423423",
+				"userId": "21312234adfsfsdaf",
+				"created": 14050003434
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Format (Required?)</th><th>Description</th></tr>
+				<tr><td>appId</td><td>String (Yes)</td><td>Zzish e-mbaas-sador application Id</td></tr>
+				<tr><td>userId</td><td>String (Yes)</td><td>The userId from the <a href="#users">users</a> response. </td></tr>
+				<tr><td>deviceId</td><td>String (Yes)</td><td>The deviceId from the <a href="#devices">devices</a>  response. </td></tr>
+				<tr><td>created</td><td>String (No)</td><td>The time the device was created in Long Format</td></tr>
+				</table>
+
+				<pre>
+				&#123;	
+				"status": 0,
+				"message": "",
+				"id": "123123234234asdfasdf"
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Format</th><th>Description</th></tr>
+				<tr><td>status</td><td>Number</td><td>0 - OK, Non Zero - Error/Warning</td></tr>
+				<tr><td>message</td><td>String</td><td>A brief description of error. Empty if no error</td></tr>
+				<tr><td>id</td><td>String</td><td>A unique string representing the session. To be used in other services (e.g. <a href="#sessionsstop">sessions/{id}/stop</a>)</td></tr>
+				</table>	
+
+				<table class="table table-bordered doctable">
+				<tr><th>Error Code</th><th>Description</th></tr>
+				<tr><td>101</td><td>Missing appId</td></tr>
+				<tr><td>102</td><td>Invalid appId</td></tr>
+				<tr><td>201</td><td>Missing deviceId</td></tr>
+				<tr><td>202</td><td>Invalid deviceId</td></tr>
+				<tr><td>301</td><td>Missing userId</td></tr>
+				<tr><td>302</td><td>Invalid userId</td></tr>
+				</table>
+
+				<h6 id="sessionsstop">sessions/{id}/stop</h6>
+
+				<p>Stop a user session</p>
+
+				<pre>
+				&#123;
+				"appId" : "1234asdfa2342342asfd",
+				"finished": 234234234234234
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Format (Required?)</th><th>Description</th></tr>
+				<tr><td>appId</td><td>String (Yes)</td><td>Zzish e-mbaas-sador application Id</td></tr>
+				<tr><td>id (URL)</td><td>String (Yes)</td><td>The sessionId returned from <a href="#sessions">sessions</a> response</td></tr>
+				<tr><td>finished</td><td>String (No)</td><td>The time the session closed in Long Format</td></tr>
+				</table>
+
+				<pre>
+				&#123;	
+				"status": 0,
+				"message": ""
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Format</th><th>Description</th></tr>
+				<tr><td>status</td><td>Number</td><td>0 - OK, Non Zero - Error/Warning</td></tr>
+				<tr><td>message</td><td>String</td><td>A brief description of error. Empty if no error</td></tr>
+				</table>	
+
+				<table class="table table-bordered doctable">
+				<tr><th>Error Code</th><th>Description</th></tr>
+				<tr><td>101</td><td>Missing appId</td></tr>
+				<tr><td>102</td><td>Invalid appId</td></tr>
+				<tr><td>401</td><td>Missing sessionId</td></tr>
+				<tr><td>402</td><td>Invalid sessionId</td></tr>
+				</table>
+
+				<h6 id="activities">activities</h6>
+
+				<p>Start an Activity</p>
+
+				<pre>
+				&#123;
+				"appId" : "1234asdfa2342342asfd",
+				"sessionId": "123123234234asdfasdf",
+				"name" : "Activity 1",
+				"created": 14050343404
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Format (Required?)</th><th>Description</th></tr>
+				<tr><td>appId</td><td>String (Yes)</td><td>Zzish e-mbaas-sador application Id</td></tr>
+				<tr><td>sessionId</td><td>String (Yes)</td><td>The id returned from <a href="#sessions">sessions</a> response</td></tr>
+				<tr><td>name</td><td>String (Yes)</td><td>A string describing this type of activity.</td></tr>
+				<tr><td>created</td><td>String (No)</td><td>The time the activity was created in Long Format</td></tr>
+				</table>
+
+				<pre>
+				&#123;	
+				"status": 0,
+				"message": "",
+				"id": "1234asf234234234234",
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Format</th><th>Description</th></tr>
+				<tr><td>status</td><td>Number</td><td>0 - OK, Non Zero - Error/Warning</td></tr>
+				<tr><td>message</td><td>String</td><td>A brief description of error. Empty if no error</td></tr>
+				<tr><td>id</td><td>String</td><td>A unique string representing the activity. To be used in other services (e.g. <a href="#sessionsstop">sessions/{id}/stop</a>)</td></tr>
+
+				</table>	
+
+				<table class="table table-bordered doctable">
+				<tr><th>Error Code</th><th>Description</th></tr>
+				<tr><td>101</td><td>Missing appId</td></tr>
+				<tr><td>102</td><td>Invalid appId</td></tr>
+				<tr><td>401</td><td>Missing sessionId</td></tr>
+				<tr><td>402</td><td>Invalid sessionId</td></tr>
+				</table>
+
+				<h6 id="activitiespause">activities/{id}/pause</h6>
+
+				<p>Pause an Activity</p>
+
+				<pre>
+				&#123;
+				"appId" : "1234asdfa2342342asfd",
+				"activityId" : "1234asf234234234234",
+				"created": 14050343404
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Format (Required?)</th><th>Description</th></tr>
+				<tr><td>id (URL)</td><td>String (Yes)</td><td>The activity Id returned from <a href="#activities">activities</a> response</td></tr>
+				<tr><td>appId</td><td>String (Yes)</td><td>Zzish e-mbaas-sador application Id</td></tr>
+				<tr><td>activityId</td><td>String (Yes)</td><td>The id returned from <a href="#activities">activities</a> response</td></tr>
+				<tr><td>created</td><td>String (No)</td><td>The time the activity was created in Long Format</td></tr>
+				</table>
+
+				<pre>
+				&#123;	
+				"status": 0,
+				"message": ""
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Format</th><th>Description</th></tr>
+				<tr><td>status</td><td>Number</td><td>0 - OK, Non Zero - Error/Warning</td></tr>
+				<tr><td>message</td><td>String</td><td>A brief description of error. Empty if no error</td></tr>
+				</table>	
+
+				<table class="table table-bordered doctable">
+				<tr><th>Error Code</th><th>Description</th></tr>
+				<tr><td>101</td><td>Missing appId</td></tr>
+				<tr><td>102</td><td>Invalid appId</td></tr>
+				<tr><td>501</td><td>Missing activityId</td></tr>
+				<tr><td>502</td><td>Invalid activityId</td></tr>
+				</table>
+
+				<h6 id="activitiesresume">activities/{id}/resume</h6>
+
+				<p>Resume an Activity</p>
+
+				<pre>
+				&#123;
+				"appId" : "1234asdfa2342342asfd",
+				"activityId" : "1234asf234234234234",
+				"finished": 14050343404
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Format (Required?)</th><th>Description</th></tr>
+				<tr><td>id (URL)</td><td>String (Yes)</td><td>The activity Id returned from <a href="#activities">activities</a> response</td></tr>
+				<tr><td>appId</td><td>String (Yes)</td><td>Zzish e-mbaas-sador application Id</td></tr>
+				<tr><td>activityId</td><td>String (Yes)</td><td>The activityId returned from <a href="#activities">activities</a> response</td></tr>
+				<tr><td>resumed</td><td>String (No)</td><td>The time the activity was resumed in Long Format</td></tr>
+				</table>
+
+				<pre>
+				&#123;	
+				"status": 0,
+				"message": ""
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Format</th><th>Description</th></tr>
+				<tr><td>status</td><td>Number</td><td>0 - OK, Non Zero - Error/Warning</td></tr>
+				<tr><td>message</td><td>String</td><td>A brief description of error. Empty if no error</td></tr>
+				</table>	
+
+				<table class="table table-bordered doctable">
+				<tr><th>Error Code</th><th>Description</th></tr>
+				<tr><td>101</td><td>Missing appId</td></tr>
+				<tr><td>102</td><td>Invalid appId</td></tr>
+				<tr><td>501</td><td>Missing activityId</td></tr>
+				<tr><td>502</td><td>Invalid activityId</td></tr>
+				</table>
+
+				<h6 id="activitiesstop">activities/{id}/stop</h6>
+
+				<p>Stop an Activity</p>
+
+				<pre>
+				&#123;
+				"appId" : "1234asdfa2342342asfd",
+				"activityId" : "1234asf234234234234"
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Format (Required?)</th><th>Description</th></tr>
+				<tr><td>id (URL)</td><td>String (Yes)</td><td>The activity Id returned from <a href="#activities">activities</a> response</td></tr>
+				<tr><td>appId</td><td>String (Yes)</td><td>Zzish e-mbaas-sador application Id</td></tr>
+				<tr><td>activityId</td><td>String (Yes)</td><td>The activityId returned from <a href="#activities">activities</a> response</td></tr>
+				</table>
+
+				<pre>
+				&#123;	
+				"status": 0,
+				"message": ""
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Format</th><th>Description</th></tr>
+				<tr><td>status</td><td>Number</td><td>0 - OK, Non Zero - Error/Warning</td></tr>
+				<tr><td>message</td><td>String</td><td>A brief description of error. Empty if no error</td></tr>
+				</table>	
+
+				<table class="table table-bordered doctable">
+				<tr><th>Error Code</th><th>Description</th></tr>
+				<tr><td>101</td><td>Missing appId</td></tr>
+				<tr><td>102</td><td>Invalid appId</td></tr>
+				<tr><td>501</td><td>Missing activityId</td></tr>
+				<tr><td>502</td><td>Invalid activityId</td></tr>
+				</table>
+
+
+				<h6 id="actions">activities/{id}/actions</h6>
+
+				<p>Log an action within an activity</p>
+
+				<pre>
+				&#123;
+				"appId" : "1234asdfa2342342asfd",
+				"name" : "234234",
+				"activityId" : "1234asf234234234234",
+				"created": 1233355544,
+				"finished": 1231242324,
+				"score": 0.5,
+				"duration", 34,
+				"correct", true,
+				attributes:&#91;
+				&#123 "name" : "number of tries", value: 3&#125,
+				&#123 "name" : "hints", value: false&#125
+				&#93;
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Format (Required?)</th><th>Description</th></tr>
+				<tr><td>id (URL)</td><td>String (Yes)</td><td>The activity Id returned from <a href="#activities">activities</a> response</td></tr>
+				<tr><td>appId</td><td>String (Yes)</td><td>Zzish e-mbaas-sador application Id</td></tr>
+				<tr><td>name</td><td>String (Yes)</td><td>Name of Action</tr>
+				<tr><td>activityId</td><td>String (Yes)</td><td>The activityId returned from <a href="#activities">activities</a> response</td></tr>
+				<tr><td>created</td><td>String (No)</td><td>The time the action was started in Long Format</td></tr>
+				<tr><td>finished</td><td>String (No)</td><td>The time the action was finished (if applicable) in Long Format</td></tr>
+				<tr><td>score</td><td>String (No)</td><td>The score for the action in float format</td></tr>
+				<tr><td>duration</td><td>String (No)</td><td>The duration for the action in long format</td></tr>
+				<tr><td>correct</td><td>String (No)</td><td>Whether the action was performed correctly in boolean format</td></tr>
+				<tr><td>attributes</td><td>Array (No)</td><td>An array of up to 5 attributes with name and value (both string) attributes</td></tr>
+				</table>
+
+				<pre>
+				&#123;	
+				"status": 0,
+				"message": ""
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Format</th><th>Description</th></tr>
+				<tr><td>status</td><td>Number</td><td>0 - OK, Non Zero - Error/Warning</td></tr>
+				<tr><td>message</td><td>String</td><td>A brief description of error. Empty if no error</td></tr>
+				</table>	
+
+				<table class="table table-bordered doctable">
+				<tr><th>Error Code</th><th>Description</th></tr>
+				<tr><td>101</td><td>Missing appId</td></tr>
+				<tr><td>102</td><td>Invalid appId</td></tr>
+				<tr><td>501</td><td>Missing activityId</td></tr>
+				<tr><td>502</td><td>Invalid activityId</td></tr>
+				</table>	
+
+
+				<h6 id="users">users</h6>
+
+				<p>Add a User to system</p>
+
+
+				<pre>
+				&#123;
+				"appId" : "1234asdfa2342342asfd",
+				'deviceId': "123123sdafsdf23423423",
+				'userId': 123&#44;
+				'name': "Noah",
+				'dob': 123554444&#44;
+				'gender': 1&#44;
+				'latitude': 50.12133&#44;
+				'longitude': 0.20000&#44;
+				'attributes': &#91;
+				&#123"name" : shirt_colour, value: yellow&#125;,
+				&#123"name" : hair_colour, value: blue&#125;
+				&#93;
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Format (Required?)</th><th>Description</th></tr>
+				<tr><td>id (URL)</td><td>String (Yes)</td><td>The user Id returned from <a href="#users">users</a> response</td></tr>
+				<tr><td>appId</td><td>String (Yes)/td><td>Zzish e-mbaas-sador application Id</td></tr>
+				<tr><td>deviceId</td><td>String (Yes)</td><td>The activityId returned from <a href="#devices">devices</a> response</td></tr>
+				<tr><td>userId</td><td>String (No)</td><td>Developer defined userId. Used to bridge with other systems.</td></tr>
+				<tr><td>name</td><td>String (No)</td><td>Name of the User</td></tr>
+				<tr><td>dob</td><td>Long (No)</td><td>Date of Birth in Long Format</td></tr>
+				<tr><td>gender</td><td>Integer (No)</td><td>0 - Unspecified<br/>1 - Male<br/>2 - Female</td></tr>
+				<tr><td>latitude</td><td>Float (No)</td><td>The latitude of the user's location</td></tr>
+				<tr><td>longitude</td><td>Float (No)</td><td>The longitude of the user's location</td></tr>
+				<tr><td>attributes</td><td>Array (No)</td><td>An array of up to 5 attributes with name and value (both string) attributes</td></tr>
+				</table>
+
+				<pre>
+				&#123;	
+				"status": 0,
+				"message": "",
+				id "234234252adfsd"
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Format</th><th>Description</th></tr>
+				<tr><td>status</td><td>Number</td><td>0 - OK, Non Zero - Error/Warning</td></tr>
+				<tr><td>message</td><td>String</td><td>A brief description of error. Empty if no error</td></tr>
+				<tr><td>id</td><td>String</td><td>A unique string representing the user. To be used in other services (e.g. <a href="#usersid">users/{id}</a>)</td></tr>
+				</table>	
+
+				<table class="table table-bordered doctable">
+				<tr><th>Error Code</th><th>Description</th></tr>
+				<tr><td>101</td><td>Missing appId</td></tr>
+				<tr><td>102</td><td>Invalid appId</td></tr>
+				<tr><td>201</td><td>Missing deviceId</td></tr>
+				<tr><td>202</td><td>Invalid deviceId</td></tr>
+				</table>
+
+
+				<h6 id="usersid">users/{id}</h6>
+
+				<p>Update an existing user</p>
+
+				<pre>
+				&#123;
+				"appId" : "1234asdfa2342342asfd", &#182;
+				'deviceId': "123123sdafsdf23423423", &#182;
+				'userId': ABCD123&#44; 
+				'name': "Noah",
+				'dob': 123554444&#44;
+				'gender': 1&#44;
+				'latitude': 50.12133&#44;
+				'longitude': 0.20000&#44;
+				'attributes': &#91;
+				&#123"name" : shirt_colour, value: yellow&#125;,
+				&#123"name" : hair_colour, value: blue&#125;
+				&#93;
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Format (Required?)</th><th>Description</th></tr>
+				<tr><td>id (URL)</td><td>String (Yes)</td><td>The user Id returned from <a href="#users">users</a> response</td></tr>
+				<tr><td>appId</td><td>String (Yes)/td><td>Zzish e-mbaas-sador application Id</td></tr>
+				<tr><td>deviceId</td><td>String (Yes)</td><td>The activityId returned from <a href="#devices">devices</a> response</td></tr>
+				<tr><td>userId</td><td>String (No)</td><td>Developer defined userId. Used to bridge with other systems.</td></tr>
+				<tr><td>name</td><td>String (No)</td><td>Name of the User</td></tr>
+				<tr><td>dob</td><td>Long (No)</td><td>Date of Birth in Long Format</td></tr>
+				<tr><td>gender</td><td>Integer (No)</td><td>0 - Unspecified<br/>1 - Male<br/>2 - Female</td></tr>
+				<tr><td>latitude</td><td>Float (No)</td><td>The latitude of the user's location</td></tr>
+				<tr><td>longitude</td><td>Float (No)</td><td>The longitude of the user's location</td></tr>
+				<tr><td>attributes</td><td>Array (No)</td><td>An array of up to 5 attributes with name and value (both string) attributes</td></tr>
+				</table>
+
+				<pre>
+				&#123;	
+				"status": 0,
+				"message": ""
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Format</th><th>Description</th></tr>
+				<tr><td>status</td><td>Number</td><td>0 - OK, Non Zero - Error/Warning</td></tr>
+				<tr><td>message</td><td>String</td><td>A brief description of error. Empty if no error</td></tr>
+				</table>	
+
+				<table class="table table-bordered doctable">
+				<tr><th>Error Code</th><th>Description/th></tr>
+				<tr><td>101</td><td>Missing appId</td></tr>
+				<tr><td>102</td><td>Invalid appId</td></tr>
+				<tr><td>301</td><td>Missing userId</td></tr>
+				<tr><td>302</td><td>Invalid userId</td></tr>
+				</table>
+
+				<h6 id="finish">finish</h6>
+
+				<p>Call when the app exists unexpectedly to do any cleanup</p>
+
+				<pre>
+				&#123;
+				"appId" : "1234asdfa2342342asfd"
+				"deviceId" : "123123sdafsdf23423423"
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Input Parameter</th><th>Format (Required?)</th><th>Description</th></tr>
+				<tr><td>appId</td><td>String (Yes)</td><td>Zzish e-mbaas-sador application Id</td></tr>
+				<tr><td>deviceId</td><td>String (Yes)</td><td>The deviceId from the <a href="#devices">devices</a>  response.</td></tr>
+				</table>
+
+				<pre>
+				&#123;	
+				"status": 0&#44;
+				"message": ""
+				&#125
+				</pre>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Output Parameter</th><th>Format</th><th>Description</th></tr>
+				<tr><td>status</td><td>Number</td><td>0 - OK, Non Zero - Error/Warning</td></tr>
+				<tr><td>message</td><td>String</td><td>A brief description of error. Empty if no error</td></tr>
+				</table>
+
+				<table class="table table-bordered doctable">
+				<tr><th>Error Code</th><th>Description/th></tr>
+				<tr><td>101</td><td>Missing appId</td></tr>
+				<tr><td>102</td><td>Invalid appId</td></tr>
+				<tr><td>301</td><td>Missing userId</td></tr>
+				<tr><td>302</td><td>Invalid userId</td></tr>
+				</table>
+
+
+		p &nbsp;
+

@@ -1,0 +1,77 @@
+
+
+{
+	"apiVersion": "0.0.1",
+	"swaggerVersion": "1.2",
+	"basePath": "http://10.2.199.57:8081/platform-api/api/",
+	"resourcePath": "/finish",
+	"produces": [
+		"application/json"
+		],
+	"consumes": [
+            "application/json"
+        ],	
+	"apis":[
+		{
+			"path": "finish",
+			"operations": [
+				{
+					"method": "POST",
+					"summary": "Call when the app exists unexpectedly to do any cleanup",
+					"nickname": "finish",
+					"parameters": [
+						{
+							"name": "appId",
+							"description": "Zzish e-mbass-sador application id",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						},
+						{
+							"name": "deviceId",
+							"description": "The deviceId returned from devices response",
+							"required": true,
+							"type": "string",
+							"paramType": "body"
+						}		
+
+
+					],
+
+					"errorResponses": [
+						{
+							"code":101,
+							"reason":"Missing appId"
+						},
+
+						{
+							"code":102,
+							"reason": "Invalid appId"
+						},
+						{
+							"code":301,
+							"reason": "Missing userID"
+						},
+
+						{
+							"code":302,
+							"reason": "Invalid userID"
+						}						
+					]						
+				}
+			]
+		}
+	],
+	"models": {
+		"User": {
+			"id": "user",
+			"properties": {
+				"id": {
+					"type": "string"
+					}
+				}
+		}
+	}
+}
+
+

@@ -1,0 +1,47 @@
+extends promotion_layout
+
+block content
+	div.row.main_cleanformatting_invert
+		hr
+
+		h1(align="center") API & Docs
+
+		
+
+		div.row
+
+			hr
+
+			p <a href="/api_docs" style="color: #000000;"> #{platform} </a>
+
+			div.small-4.large-centered.columns
+				div.large-6.columns#guide_icon
+					a(href="#{path}/guide")
+						img(src="/img/icons/guide.png" style="height: 125px; width: 125px; ")
+				div.large-6.columns#api_icon
+					a(href="#{path}/api")
+						img(src="/img/icons/api.jpg" style="height: 125px; width: 125px;")
+
+		p &nbsp;
+
+	script.
+		//guide image
+		$('#guide_icon')
+			.mouseenter(function () {
+				$('#guide_icon').attr("style", "border:2px solid; border-radius: 20px 20px 20px 20px; border-color: #74B4FE;");
+			});
+		$('#guide_icon')
+			.mouseleave(function () {
+				$('#guide_icon').attr("style", "");
+			});
+
+		//api image
+		$('#api_icon')
+			.mouseenter(function () {
+				$('#api_icon').attr("style", "border:2px solid; border-radius: 20px 20px 20px 20px; border-color: #74B4FE;");
+			});
+		$('#api_icon')
+			.mouseleave(function () {
+				$('#api_icon').attr("style", "");
+			});
+

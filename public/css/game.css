@@ -1,0 +1,29 @@
+
+.text p, h1, h2, h3, h4, li, ol, a {
+    color: #FFFFFF; 
+    font-family: 'Lato', sans-serif;
+}
+
+.block {
+	
+	height: 50 px;
+	width: 50 px;
+
+}
+
+.selected {
+	
+	height: 50 px;
+	width: 50 px;
+
+}
+
+.wrongSolution {
+	//flat red
+	background-color: #0000FF;
+}
+
+.rightSolution {
+	//flat green
+	background-color: #0000FF;
+}
