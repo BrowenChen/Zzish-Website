@@ -1,0 +1,22 @@
+extends promotion_layout
+
+block content
+	p &nbsp;
+	
+	div.row
+		div.row.container_invert.main_cleanformatting_invert
+			center
+				hr 
+
+				h1(align="center") Contact Us
+
+				div.small-6.large-centered.columns
+					form(id="contactUsForm" action="/contactus" method="post")
+						input(type="text" name="name" placeholder="name")
+
+						input(type="text" name="email" placeholder="email")
+
+						textarea(rows="4" cols="50" name="message" form="contactUsForm" placeholder="Message here ...") 
+
+
+						input(type="submit").button.round

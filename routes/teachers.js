@@ -7,6 +7,13 @@ var db = require("mongojs").connect(databaseUrl, collections);
 var ObjectId = require( 'mongodb' ).ObjectID;
 
 var passwordHash = require('password-hash');
+var Zzish = require('zzish/main.js');
+
+z = new Zzish();
+z.init();
+
+// var z = new Zzish();
+// z.init();
 
 exports.index = function(req, res){ 
 
@@ -29,6 +36,24 @@ exports.logout = function(req, res){
 	res.redirect('/teachers'); 
 };
 
+exports.activate = function(req, res){
+	res.render('web/activate'); 
+};
+
+exports.activate_post = function(req, res){
+	//activate teacher mode and give relevent details in database
+	var email = req.session.username;  
+
+	db.user.update({'email' : email}, {$set: {'teacher' : true}});
+
+	//turn on sessions n dat!
+	req.session.teacher_logged = true;
+	console.log(req.session.profileId);
+	req.session.teacher_id = req.session.profileId;
+
+	res.redirect('/teachers/dashboard');
+};
+
 exports.add_students = function(req, res){ 
 	var classroomId = req.params.classroom;
 	var code = req.body.code
@@ -47,24 +72,34 @@ exports.add_students = function(req, res){
 };
 
 exports.dashboard = function(req, res){ 
-	var teacher_id = req.session.teacher_id;
+	var userId = req.session.userId;
+	console.log(userId);
 
-	db.teachers.find({_id: ObjectId(teacher_id)}, function(err, teachers) {
+	z.users.get(userId, function(err, r){
+		console.log("get User returned", r);
 
-		var teacherdetails = teachers[0].teacherdetails;
-		//var classroomIds = teachers[0].classroom_id;
-
-		db.classrooms.find({owner: teacher_id}, function(err, classrooms) {
-			console.log("eafewf: " + classrooms);
-
-			if(classrooms != null){
-				res.render('teachers/dashboard', {teacher: teacherdetails, classrooms : classrooms});
-			}
-			else {
-				res.render('teachers/dashboard', {teacher: teacherdetails});
-			}
-		});		
+		if(r.classrooms != null){
+			res.render('teachers/dashboard', {name: r.name, classrooms : r.classrooms});
+		}
+		else {
+			res.render('teachers/dashboard', {name: r.name, classrooms : []});
+		}
 	});
+
+	// db.user.find({_id: ObjectId(teacher_id)}, function(err, teachers) {
+	// 	console.log('teacher data' + JSON.stringify(teachers[0].name));
+
+	// 	db.classrooms.find({owner: teacher_id}, function(err, classrooms) {
+	// 		console.log("eafewf: " + classrooms);
+
+	// 		if(classrooms != null){
+	// 			res.render('teachers/dashboard', {name: teachers[0].name, classrooms : classrooms});
+	// 		}
+	// 		else {
+	// 			res.render('teachers/dashboard', {name: teachers[0].name});
+	// 		}
+	// 	});		
+	// });
 	
 };
 
@@ -73,15 +108,19 @@ exports.classroom = function(req, res){
 	console.log(id);
 
 
-	db.classrooms.find({_id: ObjectId(id)}, function(err, classrooms) {
+	// db.classrooms.find({_id: ObjectId(id)}, function(err, classrooms) {
 		
-			if(classrooms != null){
-				res.render('teachers/classroom', {classrooms : classrooms[0]});
-			}
-			else {
-				res.render('teachers/classroom');
-			}
-		});
+	// 		if(classrooms != null){
+	// 			res.render('teachers/classroom', {classrooms : classrooms[0]});
+	// 		}
+	// 		else {
+	// 			res.render('teachers/classroom');
+	// 		}
+	// 	});
+
+
+	res.render('teachers/classroom'); 
+
 
 	// db.classrooms.find({code:classroomCode}, function(err, classroomdetails) {
 

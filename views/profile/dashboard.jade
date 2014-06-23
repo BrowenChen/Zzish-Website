@@ -252,7 +252,7 @@ block content
 									div.medium-8.columns
 										h3(align="center") #{prop.title}
 									div.medium-2.columns
-										img(onclick="settings(#{prop.id})" src="/img/icons/settings.png" height="20" width="20" align="right")
+										img(onclick="settings('#{prop.id}')" src="/img/icons/settings.png" height="20" width="20" align="right")
 
 								div.row
 									center
@@ -269,7 +269,7 @@ block content
 									div.medium-8.columns
 										h3(align="center") #{prop.title}
 									div.medium-2.columns
-										img(onclick="settings(#{prop.id})" src="/img/icons/settings.png" height="20" width="20" align="right")
+										img(onclick="settings('#{prop.id}')" src="/img/icons/settings.png" height="20" width="20" align="right")
 
 								div.row
 									center
@@ -294,7 +294,7 @@ block content
 									div.medium-8.columns
 										h3(align="center") #{prop.title}
 									div.medium-2.columns
-										img(onclick="settings(#{prop.id})" src="/img/icons/settings.png" height="20" width="20" align="right")
+										img(onclick="settings('#{prop.id}')" src="/img/icons/settings.png" height="20" width="20" align="right")
 
 								div.row
 									center
@@ -311,7 +311,7 @@ block content
 									div.medium-8.columns
 										h3(align="center") #{prop.title}
 									div.medium-2.columns
-										img(onclick="settings(#{prop.id})" src="/img/icons/settings.png" height="20" width="20" align="right")
+										img(onclick="settings('#{prop.id}')" src="/img/icons/settings.png" height="20" width="20" align="right")
 
 								div.row
 									center
@@ -328,7 +328,7 @@ block content
 									div.medium-8.columns
 										h3(align="center") #{prop.title}
 									div.medium-2.columns
-										img(onclick="settings(#{prop.id})" src="/img/icons/settings.png" height="20" width="20" align="right")
+										img(onclick="settings('#{prop.id}')" src="/img/icons/settings.png" height="20" width="20" align="right")
 
 								div.row
 									center
@@ -354,6 +354,9 @@ block settings
 			div.row
 				div.small-6.columns
 					div.row(style="margin-bottom: 20px;")
+
+						input(type="hidden")#editGraphId
+
 						div.small-6.columns
 							div.small-4.columns
 								label(for="right-label" class="right inline") x axis
@@ -589,21 +592,38 @@ block settings
 			$("#settings_box").slideUp("slow");
 		});
 
-		/* * * 
-		*	UPDATE SETTINGS CODE
-		* * */
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+		*	
+		*												UPDATE GRAPH SETTINGS CODE
+		*
+		*	TODO - get graph from relevent user - atm => hard coded => dont hard code z
+		*
+		* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 		function closeSettings() {
 			$("#updatesettings").slideUp("fast");
 		}
 
 		function settings(id){
+			console.log(id);
 			//get data from AJAX call
+
+
+			$.ajax({
+				type: 'POST',
+				contentType: 'application/json',
+				url: 'http://localhost:3000/profile/dashboard/graph/' + id,
+				success: function(data) {
+					console.log('success');
+					console.log(data);
+				}
+
 			
+			});
 
 			//set data in settings fields.
-			console.log(id);
-			graphId = id;
+			
+			//graphId = id;
 			$("#updatesettings").slideDown("fast");
 		}
 
@@ -611,9 +631,11 @@ block settings
 			alert('yyoyo');
 		}
 
-		/* * * 
-		*	GRAPH GENERATION CODE
-		* * */
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+		*	
+		*												 GRAPH GENERATION CODE
+		*
+		* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 		var length = !{JSON.stringify(charts)}.length
 		for(var i = 0; i < length ; i++){
@@ -641,8 +663,6 @@ block settings
 
 			}
 		}
-
-		console.log(chartsData);
 
 
 

@@ -1,8 +1,10 @@
+
+
 var config = {}
 
 //Database config
 config.databaseurl  = "mongodb://178.79.154.193:27017/platform";
-config.collections = ["users", "app", "teachers", "classrooms"];
+config.collections = ["user", "app", "teachers", "classrooms"];
 
 //Accounts
 config.github_client_id = "50083b53f65c8540eeed";

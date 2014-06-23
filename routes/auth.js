@@ -2,7 +2,7 @@ exports.requiresLogin = function (req, res, next) {
   var auth = req.session.logged;
   if(!auth) {
   	console.log('i dont think ur suppose to be here');
-  	return res.redirect('/login');
+  	return res.redirect('web/login');
   }
   next();
 };

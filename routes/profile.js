@@ -12,19 +12,20 @@
 var config = require('../config/config');
 
 var crypto = require('crypto');
-
 var Zzish = require('zzish/main.js');
 var databaseUrl = config.databaseurl;
 var collections = config.collections;
+
 var db = require("mongojs").connect(databaseUrl, collections);
 var ObjectId = require( 'mongodb' ).ObjectID;
-
 var appId = config.appId
-
 var sdk = require('./sdk');
 var url =  'http://dev.zzish.com/api';
-
 var passwordHash = require('password-hash');
+
+//Initialise the zzish SDK
+var z = new Zzish();
+z.init();
 
 //POST TO REGISTER
 exports.register = function(req, res){ 
@@ -33,11 +34,11 @@ exports.register = function(req, res){
 	var email_addy = req.body.email;
 	console.log(email_addy);
 	
-	db.users.find({email: email_addy}, function(err, users) {
+	db.user.find({email: email_addy}, function(err, users) {
 		//user does not exist
 		if(users.length == 0) {
 			console.log("user does not exist");
-			db.users.save({email: email_addy}, function(err, saved) {
+			db.user.save({email: email_addy}, function(err, saved) {
 			  if( err || !saved ) console.log("Users email not saved");
 			  else console.log("Users email saved");
 			});
@@ -57,13 +58,13 @@ exports.register_submit = function(req, res){
 	//Do something with received data
 	var pass = crypto.createHash('md5').update(req.body.password).digest('hex');
 
-	var user = {
+	var data = {
 		email:req.body.email,
 		name:req.body.name,
-		tel:req.body.tel,
+		phone:req.body.tel,
 		password:pass,
 
-		business:req.body.business,
+		company:req.body.business,
 		appinstalls:req.body.appinstalls,
 		nopeople:req.body.nopeople,
 
@@ -72,44 +73,31 @@ exports.register_submit = function(req, res){
 		classroom:req.body.classroom,
 		contentmodule:req.body.contentmodule,
 		gamification:req.body.gamification,
-		learninganalytics:req.body.learninganalytics
+		learninganalytics:req.body.learninganalytics,
+
+		developer: true,
+		teacher: false
 	}
 
-	console.log(user);
+	z.users.create(data, function(err, r) {
+		console.log(JSON.stringify(r));
 
-	//check if email has already been logged to the system
-	db.users.find({email: user.email}, function(err, users) {
-		//user does not exist
-		if(users.length == 0) {
-			console.log('user did not exist before');
-
-
-
-			db.users.save({email: user.email, userdetails: user, name: user.name}, function(err, saved) {
-			  if( err || !saved ) {
-			  	console.log("Users email not saved"); 
-			  }
-			  else { 
-			  	console.log("Users email saved");
-			  }
-			});
-		} 
-		else {
-			console.log('user was already in system');
-
-			db.users.update({email: user.email}, {$set: {userdetails: user}}, function(err, updated) {
-			  if( err || !updated ) console.log("User not updated");
-			  else console.log("User updated");
-			});
+		if(r.id == null) {
+			console.log('message!: ' + r.message);
+			res.redirect('web/register?email=false');
 		}
-	});
+		else{
+			//set user to logged on
+			req.session.logged = true;
+			req.session.username = data.name;
+			req.session.id = r.id;
 
-	//set user to logged on
-	req.session.logged = true;
-	req.session.username = user.name;
+			//redirect to home page
+			res.redirect('/profile/home?reg=true');
+		}
 
-	//redirect to home page
-	res.redirect('/profile/home?reg=true');
+		
+	});	
 };
 
 exports.update_profile = function(req, res){
@@ -122,7 +110,7 @@ exports.update_profile = function(req, res){
 		business: req.body.business
 	}
 
-	db.users.update({name: req.session.username}, {$set: {name: name, email: email, userdetails: userdetails}}, function(err, updated) {
+	db.user.update({name: req.session.username}, {$set: {name: name, email: email, userdetails: userdetails}}, function(err, updated) {
 	  if( err || !updated ) console.log("User not updated");
 	  else console.log("User updated");
 	});
@@ -133,19 +121,19 @@ exports.update_profile = function(req, res){
 };
 
 exports.display = function(req, res){ 
-	console.log("active username:" + req.session.username);
+	// console.log("active username:" + req.session.username);
 
 
-	db.users.find({name: req.session.username}, function(err, users) {
-		if(users.length == 0) {
-			console.log('err');
-		}
-		else{
-			console.log(users[0].userdetails);
+	// db.user.find({name: req.session.username}, functionsnction(err, users) {
+	// 	if(users.length == 0) {
+	// 		console.log('err');
+	// 	}
+	// 	else{
+	// 		console.log(users[0].userdetails);
 
-			res.render('profile/profile', { user: users[0].userdetails }); 
-		}
-	})
+	// 		res.render('profile/profile', { user: users[0].userdetails }); 
+	// 	}
+	// })
 }; 
 
 exports.forgotpassword = function(req, res){
@@ -186,27 +174,21 @@ exports.login = function(req, res){
 
 
 
-	//Initialise the zzish SDK
-	var z = new Zzish();
-	z.init();
-
-	//place the z variable in session to be used later on
-	req.session.z = z;
-
 	var email = req.body.email;
+	req.session.username = email;
 	//var password = passwordHash.generate(req.body.password);
 	var password = crypto.createHash('md5').update(req.body.password).digest('hex');
 
 	//not using SDK
 	//result = userAuth(z, email, password, function(result) {
 	z.users.auth(email, password, function(result) {
-		if(config.log) console.log('RESULT BITCH' + result);
+		if(config.log) console.log('RESULT: ' + result);
 
 		if(result.status == 0){
 			console.log('passright');
+			req.session.userId = result.id;
 			req.session.logged = true;
-			req.session.username = 	result.username;
-			req.session.token = result.authToken;
+			console.log('EUser ID session:' + req.session.userId);			
 			res.redirect('/profile/home'); 		
 		}
 		else {
@@ -233,18 +215,17 @@ exports.logout = function(req, res){
 exports.dashboard = function(req, response){
 	//SDK variabls
 	// Should take Z from session -> var z = req.session.z;
-	var z = new Zzish();
-	z.init();
 
 	var properties = []
 	var charts = [];
 
-
 	//get data about each graph
+	//var userId = req.session.id;
 	var userId = '539ae5adda06dbf09875567f';
 
 	z.users.getdashboard({userId: userId}, function(err, res) {
 		//Do stuff with res, ie error handling
+		console.log(res);
 
 		var graph = res.result;
 
@@ -398,11 +379,28 @@ function populateLineChart(labels, values){
 
 exports.getGraphDefinition = function(req, res) {
 
-	var graphId = req.body.graphId;
+	var z = new Zzish();
+	z.init();
 
-	z.users.getgraph({userId: '539ae5adda06dbf09875567f', graphId: graphId}, function(err, res) {
-		console.log(JSON.stringify(res));
+	var graphId = req.params.id;
+	console.log('graph id' + graphId);
+
+	z.users.getgraph({userId: '539ae5adda06dbf09875567f', graphId: graphId}, function(err, r) {
+		console.log('response: ' + JSON.stringify(r));
+		res.send(r);
 	});	
 }
 
+exports.updateGraphDefinition = function(req, res) {
 
+	var z = new Zzish();
+	z.init();
+
+	var graphId = req.params.id;
+	console.log('graph id' + graphId);
+
+	z.users.updateGraph({userId: '539ae5adda06dbf09875567f', graphId: graphId}, function(err, r) {
+		console.log('response: ' + JSON.stringify(r));
+		res.send(r);
+	});	
+}

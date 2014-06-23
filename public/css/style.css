@@ -51,26 +51,29 @@
     color: #FFFFFF; 
 }
 
-.main_formatting li {
+.main_formatting li, a {
     color: #74B4FE; 
+
+}
+
+.main_cleanformatting p, li, ol, a {
+    color: #FFFFFF; 
     font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 }
 
-.main_cleanformatting p, h1, h2, h3, h4, li, ol, a {
-    color: #FFFFFF; 
-    font-family: 'Lato', sans-serif;
-}
-
-.main_cleanformatting_invert h1, h2, h3, h4 {
-    color: #000000; 
-    font-family: 'Lato', sans-serif;
-}
-
-.main_cleanformatting_invert a, p, li, ol {
+.main_cleanformatting_invert p, li, ol {
     color: #000000; 
     font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 }
     
+.main_cleanformatting h1, h2, h3, h4{
+    color: #FFFFFF; 
+    font-family: 'Lato', sans-serif;
+}
+
+.main_cleanformatting_invert h1, h2, h3, h4{
+    color: #000000; 
+    font-family: 'Lato', sans-serif;
 
 .colour_yellow * {
     color: #003300; 
@@ -97,12 +100,10 @@
 
 .api_docs a {
     color: #0084FD; 
-    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 }
 
 .api_docs a:hover {
     color: #004F9E; 
-    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 }
 
 .code p {

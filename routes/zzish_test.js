@@ -67,7 +67,7 @@ exports.graph = function(req, reponse){
 
 		z.users.creategraph(data, function(err, res) {
 			console.log(res);
-			reponse.render('test');
+			reponse.render('web/test');
 		});
 	}
 }
@@ -80,7 +80,7 @@ exports.script = function(req, res){
 		
 	});
 
-	res.render('test');
+	res.render('web/test');
 };
 
 exports.app = function(req, res){ 
@@ -115,39 +115,27 @@ exports.app = function(req, res){
 		});
 	});
 	
-	res.render('test'); 
+	res.render('web/test'); 
 };
 
 exports.classroom = function(req, res){ 
 
 	z = new Zzish();
+	z.init();
+
 	var runtime =  Date.now();
 
-	function init(callback)	{
+	z.classrooms.create({name: 'Classroom JS' + runtime}, function(err, res) {
+		//id  = res.id;
+		id = res.id;
+		console.log("App res -> " + id);
 
-		z.init({appId:'53468afc30043a19979e0533', debug: true, baseUrl: url});
-
-		z.devices.create({name: 'node-device'}, function(err, res) {
-			console.log('DEVICE ID: ' + res.id);
-			callback(res.id);
-		});	
-	}
-
-
-	init(function(id) {
-
-
-		z.classrooms.create({name: 'Classroom JS' + runtime, members: [ {code:'625b'}]}, function(err, res) {
-			//id  = res.id;
-			id = res.id;
-			console.log("App res -> " + id);
-			z.classrooms.get(id, function(err, res){
-				console.log("resAIUEHFLIUHEKUFHEKLW" + JSON.stringify(res));
-			});
+		z.classrooms.get(id, function(err, res){
+			console.log("resAIUEHFLIUHEKUFHEKLW" + JSON.stringify(res));
 		});
 	});
-	
-	res.render('test'); 
+
+	res.render('web/test'); 
 };
 
 
@@ -157,21 +145,42 @@ exports.user = function(req, res){
 	z.init();
 	var runtime =  Date.now();
 
-	var data = {
-		email: '111',
-		password: crypto.createHash('md5').update('111').digest('hex')
+	if(false){
+
+		var data = {
+			email: '111' + runtime,
+			password: crypto.createHash('md5').update('111').digest('hex')
+		}
+
+		z.users.create(data, function(err, res) {
+			id = res.id;
+			console.log("created user id -> " + JSON.stringify(res));
+
+			z.users.get(id, function(err, res){
+				console.log("get User returned", res);
+			});
+		});
+
+	}
+	if(false){
+
+		z.users.get('Dw5xS3EsZI04Fh7lQLVgSnf2', function(err, res){
+				console.log("get User returned", res);
+		});
+
 	}
 
-	z.users.create(data, function(err, res) {
-		id = res._id;
-		console.log("created user id -> " + JSON.stringify(res));
+	if(true){
 
-		z.users.get(id, function(err, res){
-			console.log("get User returned", res);
+		z.users.update('Dw5xS3EsZI04Fh7lQLVgSnf2', function(err, res){
+				console.log("get User returned", res);
 		});
-	});
+
+	}
+
 	
-	res.render('test'); 
+	
+	res.render('web/test'); 
 };
 
 

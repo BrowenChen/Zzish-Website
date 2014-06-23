@@ -1,0 +1,68 @@
+extends ../mobile_layout
+
+block content
+
+	p &nbsp;
+
+	div.row
+
+		
+		div.large-12.large-centered.columns
+			
+			h1(align="center" style="margin-bottom: 20px; margin-top: -50px; font-size:75px;") Adaptive Algorithms
+
+			p &nbsp;
+
+			p(style="color: #000000;") <a href="/mobile/modules" style="color: #000000;"> Modules </a> > Adaptive Algorithms
+
+		
+			p Adaptive Algorithms enable you to automatically personalize the learning experience to each student and so optimize the rate at which they learn.   The Zzish adaptive algorithms module provides three sets of algorithms: adaptive testing, spaced repetition and personalized path planning/guided learning.
+
+
+			hr
+
+			h2 Key Features
+
+			div.main_formatting.small-10.large-centered.columns
+				ol
+					li Adaptive Testing
+					li Spaced Repetition
+					li Personal Path Planning
+
+
+			hr
+
+			h1(align="center") Vision
+
+			p A key element of making your app more valuable to learners is to help optimize the rate at which they learn.   Our adaptive algorithms module provides three sets of algorithms to help do this:
+
+			ol
+				li Adaptive Testing – Lets you measure learners’ level of proficiency in as few questions as possible
+				li Spaced Repetition – Lets you optimize the rate at which learners memorise facts
+				li Personal path planning – Lets you optimize the choice of exercise for a learner based on their current level of ability
+			
+			h3 Adaptive Testing
+
+			p The goal of adaptive testing is to measure a learner’s ability in one or more topic areas in as few questions as possible.  
+
+			p Traditional testing asks a user a large number of questions and typically asks every user the same set of questions to produce a score often recorded as a percentage mark.   However certain questions are more predictive than others in determining a learner’s level of ability and the questions that are most predictive change depending on the learner’s answers to previous questions.  Thus a more accurate measure of ability can thus be measured using adaptive testing where questions are dynamically chosen to measure the learner’s ability as quickly as possible.  
+
+			p Our algorithm is simple to use.   First send us events when learners do exercises within your app and, over time, our algorithm learns which questions are most predictive for measuring learner’s level of ability.  At any time, you can then test a user’s level of ability in any topic with our simple Adaptive Testing API.
+			
+			h3 Spaced Repetition
+
+			p In 1885, professor xx conducted a study that shows that the probability of us remembering a fact declines exponentially over time a concept that has been named the “Forgetting Curve”.  However, if we relearn a fact just before it is forgotten, the slope of the curve decreases.  In fact, in general, after relearning a fact seven times you are likely to remember the fact forever.  
+
+			p Spaced repetition algorithms aim to optimize the rate at which learners memorise facts by picking the optimal time to “relearn” a fact such that it stays in memory.  Early spaced repetition algorithms treated all facts and all users as the same and assumed users completed a specific set of exercises all day.   Today’s algorithms take a big data approach to spaced repetition and aim to optimize parameters for each user and fact independently.  Moreover they work to choose these parameters to optimize overall rate of learning.
+
+			p Fortunately to use our spaced repetition algorithms, you don’t need to know the science underneath and the API is incredibly simple to use. 
+			
+			h3 Personal Path Planning
+
+			p In any subject there are typically many topics that a student can study and learn, but some topics are dependent on knowing earlier topic concepts.   For example, you can’t learn algebra until you have learnt how to multiply.  Personal path planning recommends to a learner the optimal exercise that they should do next to continue their learning based on the system’s current knowledge of that learner’s ability.
+
+			p For learners who already have some mastery of a subject it’s usually a good idea to have the learner take an adaptive test and predict the likelihood that they have already mastered some topics.  Those learners can then jump ahead to the topics that are the best starting point.   For learners who are new to a subject, they can simply start with the first topic.
+
+			p Personal path planning starts with an initial graph of topic dependencies and topic ordering and then optimises these dependencies by how quickly students are able to master new topics based on their knowledge of other topics.
+
+			p As with our other adaptive algorithms, you don’t need to understand the science to use personal path planning as the API is simple and straightforward.

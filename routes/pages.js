@@ -3,41 +3,50 @@ var config = require('../config/config');
 var databaseUrl = config.databaseurl;
 var collections = config.collections;
 var db = require("mongojs").connect(databaseUrl, collections);
+var nodemailer = require("nodemailer");
 
 exports.swag = function(req, res){ 
-	res.render('swagger_index');
+	res.render('web/swagger_index');
+};
+
+exports.comingsoon = function(req, res){ 
+	res.render('web/comingsoon');
+};
+
+exports.contactus = function(req, res){ 
+	res.render('web/contactus', { title: 'Zzish' }); 
 };
 
 exports.index = function(req, res){ 
-	res.render('index', { title: 'Zzish' }); 
+	res.render('web/index', { title: 'Zzish' }); 
 };
 
 exports.register = function(req, res){ 
-	res.render('register', { email: 'youremail@zzish.com' }); 
+	res.render('web/register', { email: 'youremail@zzish.com' }); 
 };
 
 exports.modules = function(req, res){ 
-	res.render('modules', { email: 'youremail@zzish.com' }); 
+	res.render('web/modules', { email: 'youremail@zzish.com' }); 
 };
 
 exports.faq = function(req, res){ 
-	res.render('faq', { email: 'youremail@zzish.com' }); 
+	res.render('web/faq', { email: 'youremail@zzish.com' }); 
 };
 
 exports.prices = function(req, res){ 
-	res.render('prices', { email: 'youremail@zzish.com' }); 
+	res.render('web/prices', { email: 'youremail@zzish.com' }); 
 };
 
 exports.privacypolicy = function(req, res){ 
-	res.render('privacypolicy', { email: 'youremail@zzish.com' }); 
+	res.render('web/privacypolicy', { email: 'youremail@zzish.com' }); 
 };
 
 exports.aboutus = function(req, res){ 
-	res.render('aboutus', { email: 'youremail@zzish.com' }); 
+	res.render('web/aboutus', { email: 'youremail@zzish.com' }); 
 };
 
 exports.api_docs = function(req, res){ 
-	res.render('docs', { email: 'youremail@zzish.com' }); 
+	res.render('web/docs', { email: 'youremail@zzish.com' }); 
 };
 
 //Routes for Modules
@@ -82,7 +91,7 @@ exports.api_docs_platform = function(req, res){
  	console.log(platform);
 
  	//present
-	res.render('platform', { platform: platform, path: path });
+	res.render('web/platform', { platform: platform, path: path });
 }
 
 exports.api_docs_type = function(req, res){
@@ -117,7 +126,7 @@ exports.api_docs_type = function(req, res){
 
 //Profile routes
 exports.login = function(req, res){ 
-	res.render('login', { title: 'Zzish' }); 
+	res.render('web/login', { title: 'Zzish' }); 
 };
 
 exports.home = function(req, res){ 
@@ -128,7 +137,7 @@ exports.home = function(req, res){
 exports.apps = function(req, res){
 	var username = req.session.username;
 
-	db.apps.find({author: username}, function(err, apps) {
+	db.app.find({author: username}, function(err, apps) {
 		//user does not exist
 		if(apps.length == 0) {
 			console.log("No Apps Made");
@@ -157,4 +166,23 @@ exports.quickstart = function(req, res){
 			break;
 	}
 	
+};
+
+exports.contactus_post = function(req, res){ 
+	var email = req.body.email;
+	var name = req.body.name;
+	var message = req.body.message;
+
+	var transport = nodemailer.createTransport("Sendmail");
+
+	var mailOptions = {
+	    from: "developers@zzish.com",
+	    to: "developers@zzish.com",
+	    subject: "dev Q " + name,
+	    text: "from " + email + " -> message"
+	}
+
+	transport.sendMail(mailOptions);
+
+	res.render('web/contactus', { title: 'Zzish' }); 
 };

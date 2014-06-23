@@ -1,0 +1,62 @@
+extends promotion_layout
+
+block content
+	div.row.main_cleanformatting_invert
+		hr
+
+		h1(align="center") API & Docs
+
+		hr
+
+		div.row
+
+			
+
+			p &nbsp;
+
+			p We provide a REST API to access all of our modules. It can be currently accesses our Development Server (dev.zzish.com). We have also created  SDKs for Android and iOS for seamless integration. Check out our Docs below to find out more. 
+
+
+			div.small-6.large-centered.columns
+				div.large-4.columns#android_icon
+					a(href="/api_docs/android")
+						img(src="/img/icons/android.png" style="height: 125px; width: 125px;")
+				div.large-4.columns#apple_icon
+					a(href="/api_docs/ios")
+						img(src="/img/icons/apple.jpeg" style="height: 125px; width: 125px;")
+				div.large-4.columns#internet_icon
+					a(href="/api_docs/rest")
+						img(src="/img/icons/internet.png" style="height: 125px; width: 125px;")
+
+		p &nbsp;
+
+	script.
+		//android image
+		$('#android_icon')
+			.mouseenter(function () {
+				$('#android_icon').attr("style", "border:2px solid; border-radius: 20px 20px 20px 20px; border-color: #74B4FE;");
+			});
+		$('#android_icon')
+			.mouseleave(function () {
+				$('#android_icon').attr("style", "");
+			});
+
+		//apple image
+		$('#apple_icon')
+			.mouseenter(function () {
+				$('#apple_icon').attr("style", "border:2px solid; border-radius: 20px 20px 20px 20px; border-color: #74B4FE;");
+			});
+		$('#apple_icon')
+			.mouseleave(function () {
+				$('#apple_icon').attr("style", "");
+			});
+
+		//internet image
+		$('#internet_icon')
+			.mouseenter(function () {
+				$('#internet_icon').attr("style", "border:2px solid; border-radius: 20px 20px 20px 20px; border-color: #74B4FE;");
+			});
+		$('#internet_icon')
+			.mouseleave(function () {
+				$('#internet_icon').attr("style", "");
+			});

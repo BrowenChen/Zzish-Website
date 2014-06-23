@@ -1,0 +1,281 @@
+extends layout
+
+block content
+	div(style="background-color:#000000;")
+		section(data-speed="10" data-type="background").main_cleanformatting#home
+			div.row
+				
+
+				div.large-8.columns(style="margin-bottom: 50px; ")
+					img(src="/img/zzish-logo.png" style="width: 300px; margin-bottom: 10px;")
+					h4(align="left" style="text-shadow:2px 2px 2px #000000; color: #FFFFFF; font-family: 'Lato', sans-serif; margin-top: -10px; font-size: 19px;") <b> Making Smarter. Learning Faster.</b> 
+
+					h2(align="left" style="text-shadow:2px 2px 2px #000000; color: #FFFFFF; font-family: 'Lato', sans-serif;" ) <b> The complete platform for building amazing mobile learning apps </b>
+
+
+				div.large-4.columns(style="margin-bottom: 20px;")
+					p &nbsp;
+					div.small-12.large-centered.columns(style="text-position: center; background-color:#000000; opacity:0.8; border-radius: 20px 20px 20px 20px;")
+						h3(align="center" style="color: #FFFFFF; font-family: 'Lato', sans-serif;") <b>Access limited <br> to first 500 </b>
+
+						form(name="input" action="/register" method="post")
+							hr
+
+							input(type="text" name="email" placeholder="Your email address")
+							
+							p(style="color: #FFFFFF;" align="center") Sign up and win an iPad!
+
+							hr
+							center
+								button.button.round(type="submit" value="signup") Sign Up
+
+	div(style="background-color:#6B2967; height:40%; width:100%;")#modulebase
+		div.row
+			div.small-9.large-centered.columns(style="text-position: center; margin-top: 30px;")
+				hr
+
+				h4(align="center" style="color: #FFFFFF; font-family: 'Lato', sans-serif;") Discover our six powerful modules.
+
+				hr
+
+				div.large-2.columns#module2
+					img(src="/img/icons/circle-appanalytics.png")
+				div.large-2.columns#module1
+					img(src="/img/icons/circle-adaptivealgorithms.png")
+				div.large-2.columns#module5
+					img(src="/img/icons/circle-gamification.png")
+				div.large-2.columns(style="margin-bottom: 20px;")#module6
+					img(src="/img/icons/circle-learninganalytics.png")
+				div.large-2.columns#module3
+					img(src="/img/icons/circle-classroom.png")#image3
+				div.large-2.columns#module4
+					img(src="/img/icons/circle-contentmodule.png")
+				
+
+
+				hr
+
+
+
+	div(style="background-color:#FFFFFF; height:60%; width:100%;")
+		div.row
+			div.small-9.large-centered.columns(style="text-position: center; ")
+
+				h2(align="center" style="color: #6B2967; font-family: 'Lato', sans-serif; margin-top: 15px;")#moduletitle Content Module
+
+				p(style="color: #6B2967; height: 130px;")#modulesummary Hover over one of the icons for more information
+
+				center
+					p
+						a(href="/" style="color: #000000;")#modulelink  More
+
+		div.row
+			div.small-4.large-centered.columns(style="margin-top: 10px;")
+				center
+					p
+						a.button.round.expand#signupbutton Sign Up Now!	
+					
+						img(src="/img/icons/scrollarrow.png" height="40" width="40" style="margin-top: 10px;")#clickvideo
+
+
+
+	div(style="background-color:#FFFFFF; height:100%; width:100%;")#video
+		div.row
+			div.small-9.large-centered.columns(style="text-position: center; margin-top: 50px;")
+
+				hr
+
+				h1(align="center" style="color: #000000; font-family: 'Lato', sans-serif;" ) Watch our explainer video!
+
+				hr
+
+				p Whether you already have a learning app or planning to create one from scratch, our platform can help you deliver much faster and at lower cost.  Watch our video to learn more.
+
+				center
+					iframe(src="//player.vimeo.com/video/95513272" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen)
+
+		div.row
+			div.small-4.large-centered.columns(style="margin-top: 10px;")
+				center
+					p
+						a.button.round.expand#signupbutton Sign Up Now!	
+					
+						img(src="/img/icons/scrollarrow.png" height="40" width="40" style="margin-top: 5px;")#clicksignup
+
+	section(data-speed="10" data-type="background")#signup
+		div.row
+			p &nbsp;
+			p &nbsp;
+			p &nbsp;
+
+			div.small-4.large-centered.columns(style="text-position: center; background-color:#000000; opacity:0.8; border-radius: 20px 20px 20px 20px; margin-bottom:120px;")
+				h3(align="center" style="color: #FFFFFF; font-family: 'Lato', sans-serif;") <b>Access limited <br> to first 500 </b>
+
+				form(name="input2" action="/register" method="post")
+
+					hr
+
+					input(type="text" name="email" placeholder="Your email address")
+					
+					p(style="color: #FFFFFF;" align="center") Sign up and win an iPad!
+
+					hr
+					center
+						button.button.round(type="submit" value="signup") Sign Up
+
+		footer.row
+			hr
+
+			div.row
+
+				div.large-6.columns
+					Zzish
+
+				div.large-6.columns
+					ul.inline-list.right
+						li
+							a(href="/privacypolicy") Privacy Policy
+						li
+							a(href="/aboutus") About Us
+						li
+							a(href="mailto:developers@zzish.com") Contact Us
+
+
+		
+	script.
+
+		//Changing view
+
+		document.getElementById("signupbutton").onclick = function () {  
+			$("html, body").animate({ scrollTop: $('#signup').offset().top }, 1000);
+		};
+
+		document.getElementById("clickvideo").onclick = function () {  
+			$("html, body").animate({ scrollTop: $('#video').offset().top }, 1000);
+		};
+
+		document.getElementById("clicksignup").onclick = function () {  
+			$("html, body").animate({ scrollTop: $('#signup').offset().top }, 1000);
+		};
+
+		//clickmovement
+
+
+		//Changing text
+		var fadetime = 200;
+
+		$('#module1').click(function () {  
+			$("html, body").animate({ scrollTop: $('#modulebase').offset().top }, 1000);
+		});
+
+		$('#module2').click(function () {  
+			$("html, body").animate({ scrollTop: $('#modulebase').offset().top }, 1000);
+		});
+
+		$('#module3').click(function () {  
+			$("html, body").animate({ scrollTop: $('#modulebase').offset().top }, 1000);
+		});
+
+		$('#module4').click(function () {  
+			$("html, body").animate({ scrollTop: $('#modulebase').offset().top }, 1000);
+		});
+
+		$('#module5').click(function () {  
+			$("html, body").animate({ scrollTop: $('#modulebase').offset().top }, 1000);
+		});
+
+		$('#module6').click(function () {  
+			$("html, body").animate({ scrollTop: $('#modulebase').offset().top }, 1000);
+		});
+
+		$('#module1')
+			.mouseenter(function () {
+				$('#modulelink').attr('href', '/modules/adaptivealgorithms');
+
+				$('#moduletitle').fadeOut(fadetime, function() {
+					$('#moduletitle').text("Adaptive Algorithms");
+				});
+				$('#moduletitle').fadeIn(fadetime);
+
+				//change text in summary box (cross fade)
+				$('#modulesummary').fadeOut(fadetime, function() {
+					$('#modulesummary').text("Adaptive Algorithms enable you to automatically personalize the learning experience to each student and so optimize the rate at which they learn.   The Zzish adaptive algorithms module provides three sets of algorithms: adaptive testing, spaced repetition and personalized path planning.");
+				});
+				$('#modulesummary').fadeIn(fadetime);
+			});
+
+
+		$('#module2')
+			.mouseenter(function () {
+				$('#modulelink').attr('href', '/modules/appanalytics');
+
+				$('#moduletitle').fadeOut(fadetime, function() {
+					$('#moduletitle').text("App Analytics");
+				});
+				$('#moduletitle').fadeIn(fadetime);
+
+				$('#modulesummary').fadeOut(fadetime, function() {
+					$('#modulesummary').text("Zzish App Analytics allows you to measure the engagement and efficacy of your learning app, iterate to improve these metrics and increase the revenue from your app.  You can be up and running in under 30 minutes it’s so easy to use.");
+				});
+				$('#modulesummary').fadeIn(fadetime);
+			});
+
+		$('#module3')
+			.mouseenter(function () {
+				//$('#module3').css('filter', 'hue-rotate(90deg)');
+
+				$('#modulelink').attr('href', '/modules/classroom');
+
+				$('#moduletitle').fadeOut(fadetime, function() {
+					$('#moduletitle').text("Classroom ready");
+				});
+				$('#moduletitle').fadeIn(fadetime);
+
+				$('#modulesummary').fadeOut(fadetime, function() {
+					$('#modulesummary').text("Zzish’s Classroom Ready module lets a developer take a mobile app designed for use by a single user and make it ready for use by teachers in classrooms in just a few hours by providing student logins and teacher and parent dashboards.");
+				});
+				$('#modulesummary').fadeIn(fadetime);
+			});
+
+		$('#module4')
+			.mouseenter(function () {
+				$('#modulelink').attr('href', '/modules/contentmodule');
+
+				$('#moduletitle').fadeOut(fadetime, function() {
+					$('#moduletitle').text("Content Module");
+				});
+				$('#moduletitle').fadeIn(fadetime);
+
+				$('#modulesummary').fadeOut(fadetime, function() {
+					$('#modulesummary').text("The content module provides a state-of-the-art content management system for managing data in your learning app. We provide a web interface for you to create and update data for your app, with full versioning, and a software framework to update content on devices without requiring you to deploy a new version of your app.");
+				});
+				$('#modulesummary').fadeIn(fadetime);
+			});
+		$('#module5')
+			.mouseenter(function () {
+				$('#modulelink').attr('href', '/modules/gamification');
+
+				$('#moduletitle').fadeOut(fadetime, function() {
+					$('#moduletitle').text("Gamification");
+				});
+				$('#moduletitle').fadeIn(fadetime);
+
+				$('#modulesummary').fadeOut(fadetime, function() {
+					$('#modulesummary').text("Gamification makes your app more engaging for learners and keeps them motivated and wanting to learn.  The Gamification module lets you effortlessly turn your app into a multiplayer real-time or turn based game and provides a framework for achievements, leaderboards and avatars.");
+				});
+				$('#modulesummary').fadeIn(fadetime);
+			});
+		$('#module6')
+			.mouseenter(function () {
+				$('#modulelink').attr('href', '/modules/learninganalytics');
+
+				$('#moduletitle').fadeOut(fadetime, function() {
+					$('#moduletitle').text("Learning Analytics");
+				});
+				$('#moduletitle').fadeIn(fadetime);
+
+				$('#modulesummary').fadeOut(fadetime, function() {
+					$('#modulesummary').text("The Learning Analytics module lets you provide data and insight back to the learners, teachers and parents.  We make it easy for you to compute benchmarks for learners against peer groups to show the areas in which individual learners are weak and strong.   For classrooms we automatically aggregate this data so that you can give teachers insight at the class level.");
+				});
+				$('#modulesummary').fadeIn(fadetime);
+			});

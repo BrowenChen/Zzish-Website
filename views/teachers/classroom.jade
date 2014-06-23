@@ -1,66 +1,159 @@
-extends layout
+
+extends dashboardlayout
 
 block content
-
 	div.row
+		div.col-sm-6
+			
+
+			div.row.teacher-summary(style="padding: 5px;")
+				div.well
+					div.col-sm-4
+						img(src="http://placehold.it/100x100").img-circle
+					div.col-sm-8
+						div.row
+							div.col-sm-7
+								h4 James Hunter
+								h4 Class 3B
+							div.col-sm-5
+								button(type="button" style="width: 100%; margin-top: 15px;").btn.btn-success Live
+						div.row(style="margin-top: 15px;")
+							div.progress
+								div(class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;") 60%
+							
 		
-		hr
 
-		h1(align="center") Classroom 1
+			div.row
+				div.col-sm-6.box-1(style="padding: 5px;")
+					div.well
+						h4(align="center") Updates
+						hr
 
-		hr
+						div(style="overflow: scroll; height: 50vh; padding-left: 5px;")
+							div.row.display-box
 
-		div.row
-			div.small-9.columns
-				h3 Name: #{classrooms.name}
+								h3.popover-title Owen Chen
+								div.popover-content	Finished level 3 - 69%
+								
 
-				h3 Year: #{classrooms.year}
+							div.row.display-box
+								h3.popover-title Owen Chen
+								div.popover-content	Finished level 3 - 69%
+							div.row.display-box
+								h3.popover-title Owen Chen
+								div.popover-content	Finished level 3 - 69%
+							div.row.display-box
+								h3.popover-title Owen Chen
+								div.popover-content	Finished level 3 - 69%
+							div.row.display-box
+								h3.popover-title Owen Chen
+								div.popover-content	Finished level 3 - 69%
 
-				hr
+				div.col-sm-6.box-1(style="padding: 5px;")
+					div.well
+						h4(align="center") Students
+						hr
 
-				h3 Students
+						div(style="overflow: scroll; height: 50vh; padding-left: 5px;")
+							div.row.display-box
+								div.col-sm-4
+									img(src="http://placehold.it/50x50").img-circle
+								div.col-sm-8
+									p Daryl Rodrigo
+							div.row.display-box
+								div.col-sm-4
+									img(src="http://placehold.it/50x50").img-circle
+								div.col-sm-8
+									p Daryl Rodrigo
 
-				ul#students 
-				for code in classrooms.memberIds
-					li #{code}
+							div.row.display-box
+								div.col-sm-4
+									img(src="http://placehold.it/50x50").img-circle
+								div.col-sm-8
+									p Daryl Rodrigo
 
-			div.small-3.columns
-				h3 Add Student
+							div.row.display-box
+								div.col-sm-4
+									img(src="http://placehold.it/50x50").img-circle
+								div.col-sm-8
+									p Daryl Rodrigo
 
-				input(type="text" name="student" placeholder="Code")#add_student
+							div.row.display-box
+								div.col-sm-4
+									img(src="http://placehold.it/50x50").img-circle
+								div.col-sm-8
+									p Daryl Rodrigo
+
+
+							div.row.display-box
+								div.col-sm-4
+									img(src="http://placehold.it/50x50").img-circle
+								div.col-sm-8
+									p Daryl Rodrigo
+
+							div.row.display-box
+								div.col-sm-4
+									img(src="http://placehold.it/50x50").img-circle
+								div.col-sm-8
+									p Daryl Rodrigo
+
+							div.row.display-box
+								div.col-sm-4
+									img(src="http://placehold.it/50x50").img-circle
+								div.col-sm-8
+									p Daryl Rodrigo
+
+
+
+
+
+
+
+		//- Tabs for analytics Right side of the page
+		
+		div.col-sm-6
+
+			div.row(style="margin-top: 15px;")
+				
+				ul.nav.nav-tabs
+					li.active
+						a(href="#home" data-toggle="tab") Current Standing
+					li
+						a(href="#profile" data-toggle="tab") Improvement
+					li
+						a(href="#messages" data-toggle="tab") Weaknesses
+					li
+						a(href="#settings" data-toggle="tab") Settings
+			
+
+				<!-- Tab panes -->
+				div.tab-content#my-tab-content
+					div(style="height: 40vh;").tab-pane.active.well#home
+						p Testing testing wellwellwellTesting testing wellwellwellTesting testing wellwellwellTesting testing wellwellw
+
+
+
+					div(style="height: 40vh;").well.tab-pane#profile More testing more test
+					div(style="height: 40vh;").well.tab-pane#messages Lolz
+					div(style="height: 40vh;").well.tab-pane#settings ...
+
+			div.row(style="margin-top: 15px; height: 40vh;").well
+
+
+			
 
 	script.
+		//Owen Functions
+		<script type="text/javascript">
+			jQuery(document).ready(function ($) {
+ 
+				$('#tabs').tab();
+			});
+		</script>   
+ 
+		
+		<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>  	
 
-		$('#add_student').keyup(function(e){
-			if(e.keyCode == 13)
-			{
-				var data = {};
 
-				data.code = document.getElementById('add_student').value;
-				console.log(data.code);
-				if(data.code != ""){
-					//ADD TO UL
-					var ul = document.getElementById("students");
-					var li = document.createElement("li");
-					li.appendChild(document.createTextNode(data.code));
-					ul.appendChild(li);
 
-					//AJAX request
-					$.ajax({
-						type: 'POST',
-						data: JSON.stringify(data),
-						contentType: 'application/json',
-						url: 'http://www.zzish.com/teachers/classroom/#{classrooms._id}/addstudents',
-						//url: 'http://localhost:3000/teachers/classroom/#{classrooms._id}/addstudents',
-						success: function(data) {
-							console.log('success' + data.code);
-							document.getElementById('add_student').value = "";
-							
-
-						}
-					
-					});
-				}
-			}
-		});
 

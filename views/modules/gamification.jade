@@ -1,4 +1,4 @@
-extends ../promotion_layout
+extends ../web/promotion_layout
 
 block content
 
@@ -48,11 +48,13 @@ block content
 			h2 Key Features
 
 			div.main_formatting.small-10.large-centered.columns
-				li Multi-player real-time or turn based game set up and data synchronization
-				li Integrates seamlessly with our classroom ready module for multiplayer classroom games
-				li Leaderboards framework
-				li Progress and achievements framework
-				li Avatar system
+				ol
+					li
+						a(href="#multiLink" style="color: #74B4FE") Multi-player and Classroom real-time Games
+					li 
+						a(href="#progressLink" style="color: #74B4FE") Leaderboards, Progress and achievements framework
+					li 
+						a(href="avatarLink" style="color: #74B4FE") Avatar system
 
 
 			hr
@@ -61,18 +63,20 @@ block content
 
 			p Gamification is about applying the best principles from the science of motivation to keep learners motivated and engaged.   Self Determination Theory describes the three levers of motivation as Autonomy, Competence and Relatedness and our Gamification module is specifically designed to address the latter two of these.   Our framework for rewards and achievements addresses Competence ensuring that learners get positive feedback and understand they are making steady and constant progress towards their goals.  Our framework for multiplayer gaming addresses Relatedness ensuring that learners feel they are part of a common group of people with a shared learning goal.
 
-			h3 Multi-player Gaming
+			h3#multiLink Multi-player and Classroom real-time Games
 
 			p The multiplayer gaming features make it easy for you to set up real-time or turn-based games between players and then to easily transfer in game user actions between devices. Our data transfer happens in real-time ensuring that actions that a player takes on one device is instantly reflected on other devices. 
 			p Real-time is the best option when all learners are online at the same time (for example, when in the classroom) and turn based allows learners to compete even if they are not online at the same time.
 
 			p For multiplayer gameplay in the classroom, the gamification module works seamlessly with the classroom ready module enabling students to easily challenge classmates and create in classroom games. 
 
-			h3 Progress and Achievements
+			h3#progressLink Leaderboards, Progress and achievements framework
 
 			p The achievements system lets you to set up one or more achievements for each activity, set parameters for achieving three levels for each achievement and record progress against reaching each level.   This data is all stored on our server so that if learners delete the app or log in on a new device they can restore the app to the current state of learning.
 
-			h3 Avatars
+			p Our Leaderboard Framework is suited for education as it not only shows you absolute leaders but also most improved. Leaderboards can be split into individual groups (e.g. class sets) to keep students of the same ability together. 
+
+			h3#avatarLink Avatar system
 
 			p The avatars system lets you provide learners with a choice of avatars that they can use to represent themselves in multiplayer games and on leaderboards.
 

@@ -12,19 +12,29 @@ html
 			script(src="/js/vendor/modernizr.js")
 			script(src="/js/vendor/jquery.js")
 			script(src="/js/foundation.min.js")
+			script(src="/js/foundation/foundation.tab.js")
+			script(src="/js/Chart.js")
 
 			script(src="http://thecodeplayer.com/uploads/js/jquery.easing.min.js")
 
 
 
 	body
-		nav.top-bar
-			ul.title-area
-				li.name
-					h1 
-						a(href="/" style="color: #FFFFFF; font-family: 'Lato', sans-serif;") Zzish Teachers
-
+		nav(data-topbar).top-bar
 			section.top-bar-section
+
+				ul.left
+					li(style="color: #FFFFFF; margin: 7px;").has-dropdown Account - Dev
+						ul.dropdown
+							li
+								a(href="/profile/home")  Developer
+							li
+								a(href="#") > Teacher
+							li
+								a(href="/students") Student
+							li
+								a(href="/parents") Parent
+
 				ul.right
 					li
 						a(href="/teachers/addclassroom") Add Classroom

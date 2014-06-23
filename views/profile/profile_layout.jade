@@ -19,25 +19,36 @@ html
 			script(src="//code.jquery.com/ui/1.10.4/jquery-ui.js")
 			script(src="/js/foundation/foundation.js")
 			script(src="/js/foundation/foundation.slider.js")
+			script(src="/js/foundation/foundation.topbar.js")
+			script(src="/js/foundation/foundation.dropdown.js")
 
 		
 
 
 	body
-		nav.top-bar
-			ul.title-area
-				li.name
-					h1 
-						block name
-
+		nav(data-topbar).top-bar
 			section.top-bar-section
+
+				ul.left
+					li(style="color: #FFFFFF; margin: 7px;").has-dropdown Account - Dev
+						ul.dropdown
+							li
+								a(href="#") > Developer
+							li
+								a(href="/teachers/switch") Teacher
+							li
+								a(href="/students") Student
+							li
+								a(href="/parents") Parent
+
+
+
+			
 				ul.right
 					li
 						a(href="/profile") Profile
 					li
 						a(href="/profile/apps") Apps
-					li
-						a(href="/profile/settings") Settings
 					li
 						a(href="/logout") logout
 

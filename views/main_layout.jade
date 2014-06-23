@@ -3,6 +3,8 @@ html
 	head
 		title= title
 
+		meta(name="viewport" content="width=device-width")
+
 		block css
 			link(rel='stylesheet', href='/css/foundation.css')
 			link(rel='stylesheet', href='/css/register.css')
@@ -22,7 +24,7 @@ html
 
 
 	body
-		nav.top-bar
+		nav(data-topbar).top-bar
 			ul.title-area
 				li.name
 					h1 Zzish

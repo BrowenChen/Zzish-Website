@@ -71,3 +71,48 @@ exports.app_info = function(req, res){
 	res.render('profile/app_info', { app: app }); 
 }
 
+//switching between accounts
+
+exports.teacherswitch = function(req, res){
+	console.log(req.session.username);
+	var email = req.session.username;
+
+	db.user.find({email: email}, function(err, user) {
+		if(user.teacher) {
+			console.log('teacheractive');
+			//goto teacher logged on - activate relevent sessions
+
+			req.session.teacher_logged = true;
+			console.log(req.session.profileId);
+			req.session.teacher_id = req.session.profileId;
+		}
+		else {
+			console.log('teacher isnt active yet')
+			res.render('web/activate', {role: "teacher", url: "/teachers/activate_post"});
+		}
+	});
+
+	console.log('teacherswitch');
+}
+
+exports.developerswitch = function(req, res){
+
+	db.user.find({email: email}, function(err, user) {
+		if(user.dev) {
+			console.log('teacheractive');
+			//goto teacher logged on - activate relevent sessions
+		}
+		else {
+			console.log('teacher isnt active yet')
+			res.render('web/activate', {role: "teacher", url: "/teachers/activate_post"});
+		}
+	});
+}
+
+
+
+
+
+
+
+

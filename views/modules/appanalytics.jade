@@ -1,4 +1,4 @@
-extends ../promotion_layout
+extends ../web/promotion_layout
 
 block content
 
@@ -50,16 +50,13 @@ block content
 
 			div.main_formatting.small-10.large-centered.columns
 				ol
-					li Engagement stats for:
-					ol
-						li Conversion to active users
-						li Active user sessions
-					li Efficacy stats for:
-					ol
-						li	Improvement for repeated activities
-						li Time to reach activity levels
-						li Fact retention over time
-					li Filters to compare stats by demographic or cohort for A/B testing
+					li
+						a(href="#engagementOneLink" style="color: #74B4FE") Engagement stats
+					li
+						a(href="#engagementTwoLink" style="color: #74B4FE") Efficacy stats
+					li 
+						a(href="#cohortLink" style="color: #74B4FE") Cohort Analysis
+
 
 
 
@@ -77,7 +74,7 @@ block content
 
 			p All stats can be filtered to show them by demographic or cohort for A/B testing.
 			
-			h3 Engagement Stats
+			h3#engagementOneLink Engagement Stats
 
 			p Key engagement statistics that Zzish App Analytics produces include:
 
@@ -97,13 +94,13 @@ block content
 
 			p These stats let you iterate on features and content that increase the engagement of active users.
 			
-			h3 Efficacy Stats
+			h3#engagementTwoLink Efficacy Stats
 
 			p Key efficacy stats that Zzish App Analytics computes depends on the nature of your app.  
 
 			p For apps where the learners repeat activities and are expected to improve with each iteration:
 
-			li The average improvement in activity metrics for learners for each extra iteration of the activity.
+			p \t The average improvement in activity metrics for learners for each extra iteration of the activity.
 
 			p For apps where learners work linearly through levels of activities:
 
@@ -114,3 +111,8 @@ block content
 			li The average number of facts memorised over a given number of sessions or time period.
 
 			p Measuring these stats lets you iterate on product features and content to help improve their values and so make your app more effective at helping people learn.
+
+			h3#cohortLink Cohort Analysis
+
+			p Perform simple Cohort analysis using date filters. This helps you understand how behaviour or engagement changes based on some milestone (e.g. new app release). You can perform advanced cohort analysis by adding custom attributes to users that will let you divide them into different cohorts, allowing you to compare behaviour.
+
