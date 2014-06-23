@@ -118,6 +118,7 @@ block content
 				ul.nav.nav-tabs
 					li.active
 						a(href="#home" data-toggle="tab") Current Standing
+
 					li
 						a(href="#profile" data-toggle="tab") Improvement
 					li
@@ -128,17 +129,25 @@ block content
 
 				<!-- Tab panes -->
 				div.tab-content#my-tab-content
-					div(style="height: 40vh;").tab-pane.active.well#home
-						p Testing testing wellwellwellTesting testing wellwellwellTesting testing wellwellwellTesting testing wellwellw
+					div(style="height: 80vh; overflow: scroll;").tab-pane.active.well#home
+						
+
+						-for (var i = 0; i < 4; i++){
+							div.container
+								div.row
+									-for (var j = 0; j < 5; j++){
+										div.col-sm-1.well
+											p Student User #{j}#{i} 
+									- }
+	
+
+						-}
 
 
 
 					div(style="height: 40vh;").well.tab-pane#profile More testing more test
 					div(style="height: 40vh;").well.tab-pane#messages Lolz
 					div(style="height: 40vh;").well.tab-pane#settings ...
-
-			div.row(style="margin-top: 15px; height: 40vh;").well
-
 
 			
 
